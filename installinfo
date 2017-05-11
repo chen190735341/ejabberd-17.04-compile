@@ -1,0 +1,589 @@
+/usr/local/lib/erlang/otp-17.1/lib/erlang/bin/escript rebar skip_deps=true compile
+==> rel (compile)
+==> ejabberd-17.04 (compile)
+make copy-files-sub
+make[1]: Entering directory `/software/ejabberd-17.04'
+/usr/bin/install -c -m 644 deps/cache_tab/ebin/cache_tab_app.beam /usr/local/lib/cache_tab-1.0.7/ebin/cache_tab_app.beam
+/usr/bin/install -c -m 644 deps/cache_tab/ebin/cache_tab.beam /usr/local/lib/cache_tab-1.0.7/ebin/cache_tab.beam
+/usr/bin/install -c -m 644 deps/cache_tab/ebin/cache_tab_sup.beam /usr/local/lib/cache_tab-1.0.7/ebin/cache_tab_sup.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_app.beam /usr/local/lib/esip-1.0.11/ebin/esip_app.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip.beam /usr/local/lib/esip-1.0.11/ebin/esip.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_client_transaction.beam /usr/local/lib/esip-1.0.11/ebin/esip_client_transaction.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_codec.beam /usr/local/lib/esip-1.0.11/ebin/esip_codec.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_dialog.beam /usr/local/lib/esip-1.0.11/ebin/esip_dialog.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_listener.beam /usr/local/lib/esip-1.0.11/ebin/esip_listener.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_server_transaction.beam /usr/local/lib/esip-1.0.11/ebin/esip_server_transaction.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_socket.beam /usr/local/lib/esip-1.0.11/ebin/esip_socket.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_sup.beam /usr/local/lib/esip-1.0.11/ebin/esip_sup.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_tmp_sup.beam /usr/local/lib/esip-1.0.11/ebin/esip_tmp_sup.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_transaction.beam /usr/local/lib/esip-1.0.11/ebin/esip_transaction.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_transport.beam /usr/local/lib/esip-1.0.11/ebin/esip_transport.beam
+/usr/bin/install -c -m 644 deps/esip/ebin/esip_udp_sup.beam /usr/local/lib/esip-1.0.11/ebin/esip_udp_sup.beam
+/usr/bin/install -c -m 644 deps/esip/include/esip.hrl /usr/local/lib/esip-1.0.11/include/esip.hrl
+/usr/bin/install -c -m 644 deps/ezlib/ebin/ezlib_app.beam /usr/local/lib/ezlib-1.0.2/ebin/ezlib_app.beam
+/usr/bin/install -c -m 644 deps/ezlib/ebin/ezlib.beam /usr/local/lib/ezlib-1.0.2/ebin/ezlib.beam
+/usr/bin/install -c -m 644 deps/ezlib/ebin/ezlib_sup.beam /usr/local/lib/ezlib-1.0.2/ebin/ezlib_sup.beam
+/usr/bin/install -c -m 644 deps/fast_tls/ebin/fast_tls_app.beam /usr/local/lib/fast_tls-1.0.11/ebin/fast_tls_app.beam
+/usr/bin/install -c -m 644 deps/fast_tls/ebin/fast_tls.beam /usr/local/lib/fast_tls-1.0.11/ebin/fast_tls.beam
+/usr/bin/install -c -m 644 deps/fast_tls/ebin/fast_tls_sup.beam /usr/local/lib/fast_tls-1.0.11/ebin/fast_tls_sup.beam
+/usr/bin/install -c -m 644 deps/fast_tls/ebin/p1_sha.beam /usr/local/lib/fast_tls-1.0.11/ebin/p1_sha.beam
+/usr/bin/install -c -m 644 deps/fast_tls/priv/lib/fast_tls_drv.so /usr/local/lib/fast_tls-1.0.11/priv/lib/fast_tls_drv.so
+/usr/bin/install -c -m 644 deps/fast_xml/ebin/fast_xml.beam /usr/local/lib/fast_xml-1.1.21/ebin/fast_xml.beam
+/usr/bin/install -c -m 644 deps/fast_xml/ebin/fxml.beam /usr/local/lib/fast_xml-1.1.21/ebin/fxml.beam
+/usr/bin/install -c -m 644 deps/fast_xml/ebin/fxml_gen.beam /usr/local/lib/fast_xml-1.1.21/ebin/fxml_gen.beam
+/usr/bin/install -c -m 644 deps/fast_xml/ebin/fxml_gen_pt.beam /usr/local/lib/fast_xml-1.1.21/ebin/fxml_gen_pt.beam
+/usr/bin/install -c -m 644 deps/fast_xml/ebin/fxmlrpc.beam /usr/local/lib/fast_xml-1.1.21/ebin/fxmlrpc.beam
+/usr/bin/install -c -m 644 deps/fast_xml/ebin/fxmlrpc_codec.beam /usr/local/lib/fast_xml-1.1.21/ebin/fxmlrpc_codec.beam
+/usr/bin/install -c -m 644 deps/fast_xml/ebin/fxml_stream.beam /usr/local/lib/fast_xml-1.1.21/ebin/fxml_stream.beam
+/usr/bin/install -c -m 644 deps/fast_xml/ebin/fxml_sup.beam /usr/local/lib/fast_xml-1.1.21/ebin/fxml_sup.beam
+/usr/bin/install -c -m 644 deps/fast_xml/priv/lib/fxml.so /usr/local/lib/fast_xml-1.1.21/priv/lib/fxml.so
+/usr/bin/install -c -m 644 deps/fast_xml/include/fxml_gen.hrl /usr/local/lib/fast_xml-1.1.21/include/fxml_gen.hrl
+/usr/bin/install -c -m 644 deps/fast_yaml/ebin/fast_yaml_app.beam /usr/local/lib/fast_yaml-1.0.9/ebin/fast_yaml_app.beam
+/usr/bin/install -c -m 644 deps/fast_yaml/ebin/fast_yaml.beam /usr/local/lib/fast_yaml-1.0.9/ebin/fast_yaml.beam
+/usr/bin/install -c -m 644 deps/fast_yaml/ebin/fast_yaml_sup.beam /usr/local/lib/fast_yaml-1.0.9/ebin/fast_yaml_sup.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/glc.beam /usr/local/lib/goldrush-0.1.8/ebin/glc.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/glc_code.beam /usr/local/lib/goldrush-0.1.8/ebin/glc_code.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/glc_lib.beam /usr/local/lib/goldrush-0.1.8/ebin/glc_lib.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/glc_ops.beam /usr/local/lib/goldrush-0.1.8/ebin/glc_ops.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/gr_app.beam /usr/local/lib/goldrush-0.1.8/ebin/gr_app.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/gr_context.beam /usr/local/lib/goldrush-0.1.8/ebin/gr_context.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/gr_counter.beam /usr/local/lib/goldrush-0.1.8/ebin/gr_counter.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/gr_counter_sup.beam /usr/local/lib/goldrush-0.1.8/ebin/gr_counter_sup.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/gre.beam /usr/local/lib/goldrush-0.1.8/ebin/gre.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/gr_manager.beam /usr/local/lib/goldrush-0.1.8/ebin/gr_manager.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/gr_manager_sup.beam /usr/local/lib/goldrush-0.1.8/ebin/gr_manager_sup.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/gr_param.beam /usr/local/lib/goldrush-0.1.8/ebin/gr_param.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/gr_param_sup.beam /usr/local/lib/goldrush-0.1.8/ebin/gr_param_sup.beam
+/usr/bin/install -c -m 644 deps/goldrush/ebin/gr_sup.beam /usr/local/lib/goldrush-0.1.8/ebin/gr_sup.beam
+/usr/bin/install -c -m 644 deps/iconv/ebin/iconv_app.beam /usr/local/lib/iconv-1.0.4/ebin/iconv_app.beam
+/usr/bin/install -c -m 644 deps/iconv/ebin/iconv.beam /usr/local/lib/iconv-1.0.4/ebin/iconv.beam
+/usr/bin/install -c -m 644 deps/iconv/ebin/iconv_sup.beam /usr/local/lib/iconv-1.0.4/ebin/iconv_sup.beam
+/usr/bin/install -c -m 644 deps/jiffy/ebin/jiffy.beam /usr/local/lib/jiffy-0.14.8/ebin/jiffy.beam
+/usr/bin/install -c -m 644 deps/jiffy/ebin/jiffy_utf8.beam /usr/local/lib/jiffy-0.14.8/ebin/jiffy_utf8.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/error_logger_lager_h.beam /usr/local/lib/lager-3.2.1/ebin/error_logger_lager_h.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_app.beam /usr/local/lib/lager-3.2.1/ebin/lager_app.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_backend_throttle.beam /usr/local/lib/lager-3.2.1/ebin/lager_backend_throttle.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager.beam /usr/local/lib/lager-3.2.1/ebin/lager.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_common_test_backend.beam /usr/local/lib/lager-3.2.1/ebin/lager_common_test_backend.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_config.beam /usr/local/lib/lager-3.2.1/ebin/lager_config.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_console_backend.beam /usr/local/lib/lager-3.2.1/ebin/lager_console_backend.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_crash_log.beam /usr/local/lib/lager-3.2.1/ebin/lager_crash_log.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_default_formatter.beam /usr/local/lib/lager-3.2.1/ebin/lager_default_formatter.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_file_backend.beam /usr/local/lib/lager-3.2.1/ebin/lager_file_backend.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_format.beam /usr/local/lib/lager-3.2.1/ebin/lager_format.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_handler_watcher.beam /usr/local/lib/lager-3.2.1/ebin/lager_handler_watcher.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_handler_watcher_sup.beam /usr/local/lib/lager-3.2.1/ebin/lager_handler_watcher_sup.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_manager_killer.beam /usr/local/lib/lager-3.2.1/ebin/lager_manager_killer.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_msg.beam /usr/local/lib/lager-3.2.1/ebin/lager_msg.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_stdlib.beam /usr/local/lib/lager-3.2.1/ebin/lager_stdlib.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_sup.beam /usr/local/lib/lager-3.2.1/ebin/lager_sup.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_transform.beam /usr/local/lib/lager-3.2.1/ebin/lager_transform.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_trunc_io.beam /usr/local/lib/lager-3.2.1/ebin/lager_trunc_io.beam
+/usr/bin/install -c -m 644 deps/lager/ebin/lager_util.beam /usr/local/lib/lager-3.2.1/ebin/lager_util.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_app.beam /usr/local/lib/luerl-1/ebin/luerl_app.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl.beam /usr/local/lib/luerl-1/ebin/luerl.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_comp.beam /usr/local/lib/luerl-1/ebin/luerl_comp.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_comp_cg.beam /usr/local/lib/luerl-1/ebin/luerl_comp_cg.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_comp_env.beam /usr/local/lib/luerl-1/ebin/luerl_comp_env.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_comp_locf.beam /usr/local/lib/luerl-1/ebin/luerl_comp_locf.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_comp_peep.beam /usr/local/lib/luerl-1/ebin/luerl_comp_peep.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_comp_vars.beam /usr/local/lib/luerl-1/ebin/luerl_comp_vars.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_emul.beam /usr/local/lib/luerl-1/ebin/luerl_emul.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_lib_basic.beam /usr/local/lib/luerl-1/ebin/luerl_lib_basic.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_lib.beam /usr/local/lib/luerl-1/ebin/luerl_lib.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_lib_bit32.beam /usr/local/lib/luerl-1/ebin/luerl_lib_bit32.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_lib_io.beam /usr/local/lib/luerl-1/ebin/luerl_lib_io.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_lib_math.beam /usr/local/lib/luerl-1/ebin/luerl_lib_math.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_lib_os.beam /usr/local/lib/luerl-1/ebin/luerl_lib_os.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_lib_package.beam /usr/local/lib/luerl-1/ebin/luerl_lib_package.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_lib_string.beam /usr/local/lib/luerl-1/ebin/luerl_lib_string.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_lib_string_format.beam /usr/local/lib/luerl-1/ebin/luerl_lib_string_format.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_lib_table.beam /usr/local/lib/luerl-1/ebin/luerl_lib_table.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_parse.beam /usr/local/lib/luerl-1/ebin/luerl_parse.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_scan.beam /usr/local/lib/luerl-1/ebin/luerl_scan.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/luerl_sup.beam /usr/local/lib/luerl-1/ebin/luerl_sup.beam
+/usr/bin/install -c -m 644 deps/luerl/ebin/ttdict.beam /usr/local/lib/luerl-1/ebin/ttdict.beam
+/usr/bin/install -c -m 644 deps/p1_oauth2/ebin/oauth2_backend.beam /usr/local/lib/p1_oauth2-0.6.1/ebin/oauth2_backend.beam
+/usr/bin/install -c -m 644 deps/p1_oauth2/ebin/oauth2.beam /usr/local/lib/p1_oauth2-0.6.1/ebin/oauth2.beam
+/usr/bin/install -c -m 644 deps/p1_oauth2/ebin/oauth2_config.beam /usr/local/lib/p1_oauth2-0.6.1/ebin/oauth2_config.beam
+/usr/bin/install -c -m 644 deps/p1_oauth2/ebin/oauth2_priv_set.beam /usr/local/lib/p1_oauth2-0.6.1/ebin/oauth2_priv_set.beam
+/usr/bin/install -c -m 644 deps/p1_oauth2/ebin/oauth2_response.beam /usr/local/lib/p1_oauth2-0.6.1/ebin/oauth2_response.beam
+/usr/bin/install -c -m 644 deps/p1_oauth2/ebin/oauth2_token.beam /usr/local/lib/p1_oauth2-0.6.1/ebin/oauth2_token.beam
+/usr/bin/install -c -m 644 deps/p1_oauth2/ebin/oauth2_token_generation.beam /usr/local/lib/p1_oauth2-0.6.1/ebin/oauth2_token_generation.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/p1_edoc_layout.beam /usr/local/lib/p1_utils-1.0.8/ebin/p1_edoc_layout.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/p1_file_queue.beam /usr/local/lib/p1_utils-1.0.8/ebin/p1_file_queue.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/p1_fsm.beam /usr/local/lib/p1_utils-1.0.8/ebin/p1_fsm.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/p1_http.beam /usr/local/lib/p1_utils-1.0.8/ebin/p1_http.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/p1_nif_utils.beam /usr/local/lib/p1_utils-1.0.8/ebin/p1_nif_utils.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/p1_queue.beam /usr/local/lib/p1_utils-1.0.8/ebin/p1_queue.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/p1_server.beam /usr/local/lib/p1_utils-1.0.8/ebin/p1_server.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/p1_time_compat.beam /usr/local/lib/p1_utils-1.0.8/ebin/p1_time_compat.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/p1_utils.beam /usr/local/lib/p1_utils-1.0.8/ebin/p1_utils.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/p1_utils_sup.beam /usr/local/lib/p1_utils-1.0.8/ebin/p1_utils_sup.beam
+/usr/bin/install -c -m 644 deps/p1_utils/ebin/treap.beam /usr/local/lib/p1_utils-1.0.8/ebin/treap.beam
+/usr/bin/install -c -m 644 deps/stringprep/ebin/stringprep_app.beam /usr/local/lib/stringprep-1.0.8/ebin/stringprep_app.beam
+/usr/bin/install -c -m 644 deps/stringprep/ebin/stringprep.beam /usr/local/lib/stringprep-1.0.8/ebin/stringprep.beam
+/usr/bin/install -c -m 644 deps/stringprep/ebin/stringprep_sup.beam /usr/local/lib/stringprep-1.0.8/ebin/stringprep_sup.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/stun_app.beam /usr/local/lib/stun-1.0.10/ebin/stun_app.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/stun.beam /usr/local/lib/stun-1.0.10/ebin/stun.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/stun_codec.beam /usr/local/lib/stun-1.0.10/ebin/stun_codec.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/stun_listener.beam /usr/local/lib/stun-1.0.10/ebin/stun_listener.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/stun_shaper.beam /usr/local/lib/stun-1.0.10/ebin/stun_shaper.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/stun_sup.beam /usr/local/lib/stun-1.0.10/ebin/stun_sup.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/stun_test.beam /usr/local/lib/stun-1.0.10/ebin/stun_test.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/stun_tmp_sup.beam /usr/local/lib/stun-1.0.10/ebin/stun_tmp_sup.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/turn.beam /usr/local/lib/stun-1.0.10/ebin/turn.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/turn_sm.beam /usr/local/lib/stun-1.0.10/ebin/turn_sm.beam
+/usr/bin/install -c -m 644 deps/stun/ebin/turn_tmp_sup.beam /usr/local/lib/stun-1.0.10/ebin/turn_tmp_sup.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/flex_offline.beam /usr/local/lib/xmpp-1.1.9/ebin/flex_offline.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/jid.beam /usr/local/lib/xmpp-1.1.9/ebin/jid.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/mam_query.beam /usr/local/lib/xmpp-1.1.9/ebin/mam_query.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/muc_register.beam /usr/local/lib/xmpp-1.1.9/ebin/muc_register.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/muc_request.beam /usr/local/lib/xmpp-1.1.9/ebin/muc_request.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/muc_roomconfig.beam /usr/local/lib/xmpp-1.1.9/ebin/muc_roomconfig.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/muc_roominfo.beam /usr/local/lib/xmpp-1.1.9/ebin/muc_roominfo.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/p1_mucsub.beam /usr/local/lib/xmpp-1.1.9/ebin/p1_mucsub.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/p1_stream.beam /usr/local/lib/xmpp-1.1.9/ebin/p1_stream.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/pubsub_get_pending.beam /usr/local/lib/xmpp-1.1.9/ebin/pubsub_get_pending.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/pubsub_node_config.beam /usr/local/lib/xmpp-1.1.9/ebin/pubsub_node_config.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/pubsub_publish_options.beam /usr/local/lib/xmpp-1.1.9/ebin/pubsub_publish_options.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/pubsub_subscribe_authorization.beam /usr/local/lib/xmpp-1.1.9/ebin/pubsub_subscribe_authorization.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/pubsub_subscribe_options.beam /usr/local/lib/xmpp-1.1.9/ebin/pubsub_subscribe_options.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/rfc3921.beam /usr/local/lib/xmpp-1.1.9/ebin/rfc3921.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/rfc6120.beam /usr/local/lib/xmpp-1.1.9/ebin/rfc6120.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/rfc6121.beam /usr/local/lib/xmpp-1.1.9/ebin/rfc6121.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xdata_codec.beam /usr/local/lib/xmpp-1.1.9/ebin/xdata_codec.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0004.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0004.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0012.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0012.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0013.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0013.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0016.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0016.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0022.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0022.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0023.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0023.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0030.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0030.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0033.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0033.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0039.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0039.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0045.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0045.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0048.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0048.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0049.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0049.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0050.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0050.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0054.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0054.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0055.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0055.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0059.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0059.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0060.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0060.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0065.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0065.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0066.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0066.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0077.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0077.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0078.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0078.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0085.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0085.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0092.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0092.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0114.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0114.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0115.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0115.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0131.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0131.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0138.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0138.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0153.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0153.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0158.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0158.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0172.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0172.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0191.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0191.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0198.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0198.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0199.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0199.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0202.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0202.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0203.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0203.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0220.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0220.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0221.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0221.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0231.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0231.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0249.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0249.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0264.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0264.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0279.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0279.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0280.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0280.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0297.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0297.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0313.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0313.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0334.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0334.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0352.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0352.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0355.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0355.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0356.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0356.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0359.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0359.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0363.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0363.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xep0369.beam /usr/local/lib/xmpp-1.1.9/ebin/xep0369.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xmpp.beam /usr/local/lib/xmpp-1.1.9/ebin/xmpp.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xmpp_codec.beam /usr/local/lib/xmpp-1.1.9/ebin/xmpp_codec.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xmpp_codec_external.beam /usr/local/lib/xmpp-1.1.9/ebin/xmpp_codec_external.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xmpp_tr.beam /usr/local/lib/xmpp-1.1.9/ebin/xmpp_tr.beam
+/usr/bin/install -c -m 644 deps/xmpp/ebin/xmpp_util.beam /usr/local/lib/xmpp-1.1.9/ebin/xmpp_util.beam
+/usr/bin/install -c -m 644 deps/xmpp/include/flex_offline.hrl /usr/local/lib/xmpp-1.1.9/include/flex_offline.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/jid.hrl /usr/local/lib/xmpp-1.1.9/include/jid.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/mam_query.hrl /usr/local/lib/xmpp-1.1.9/include/mam_query.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/muc_register.hrl /usr/local/lib/xmpp-1.1.9/include/muc_register.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/muc_request.hrl /usr/local/lib/xmpp-1.1.9/include/muc_request.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/muc_roomconfig.hrl /usr/local/lib/xmpp-1.1.9/include/muc_roomconfig.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/muc_roominfo.hrl /usr/local/lib/xmpp-1.1.9/include/muc_roominfo.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/ns.hrl /usr/local/lib/xmpp-1.1.9/include/ns.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/pubsub_get_pending.hrl /usr/local/lib/xmpp-1.1.9/include/pubsub_get_pending.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/pubsub_node_config.hrl /usr/local/lib/xmpp-1.1.9/include/pubsub_node_config.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/pubsub_publish_options.hrl /usr/local/lib/xmpp-1.1.9/include/pubsub_publish_options.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/pubsub_subscribe_authorization.hrl /usr/local/lib/xmpp-1.1.9/include/pubsub_subscribe_authorization.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/pubsub_subscribe_options.hrl /usr/local/lib/xmpp-1.1.9/include/pubsub_subscribe_options.hrl
+/usr/bin/install -c -m 644 deps/xmpp/include/xmpp_codec.hrl /usr/local/lib/xmpp-1.1.9/include/xmpp_codec.hrl
+/usr/bin/install -c -m 644 ebin/acl.beam /usr/local/lib/ejabberd-17.04/ebin/acl.beam
+/usr/bin/install -c -m 644 ebin/cyrsasl_anonymous.beam /usr/local/lib/ejabberd-17.04/ebin/cyrsasl_anonymous.beam
+/usr/bin/install -c -m 644 ebin/cyrsasl.beam /usr/local/lib/ejabberd-17.04/ebin/cyrsasl.beam
+/usr/bin/install -c -m 644 ebin/cyrsasl_digest.beam /usr/local/lib/ejabberd-17.04/ebin/cyrsasl_digest.beam
+/usr/bin/install -c -m 644 ebin/cyrsasl_oauth.beam /usr/local/lib/ejabberd-17.04/ebin/cyrsasl_oauth.beam
+/usr/bin/install -c -m 644 ebin/cyrsasl_plain.beam /usr/local/lib/ejabberd-17.04/ebin/cyrsasl_plain.beam
+/usr/bin/install -c -m 644 ebin/cyrsasl_scram.beam /usr/local/lib/ejabberd-17.04/ebin/cyrsasl_scram.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_access_permissions.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_access_permissions.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_admin.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_admin.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_app.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_app.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_auth_anonymous.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_auth_anonymous.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_auth.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_auth.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_auth_external.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_auth_external.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_auth_ldap.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_auth_ldap.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_auth_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_auth_mnesia.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_auth_pam.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_auth_pam.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_auth_riak.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_auth_riak.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_auth_sql.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_auth_sql.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_backend_sup.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_backend_sup.beam
+/usr/bin/install -c -m 644 ebin/ejabberd.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_bosh.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_bosh.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_c2s.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_c2s.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_c2s_config.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_c2s_config.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_captcha.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_captcha.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_cluster.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_cluster.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_commands.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_commands.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_commands_doc.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_commands_doc.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_config.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_config.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_ctl.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_ctl.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_hooks.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_hooks.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_http.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_http.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_http_ws.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_http_ws.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_idna.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_idna.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_listener.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_listener.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_local.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_local.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_logger.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_logger.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_mnesia.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_oauth.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_oauth.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_oauth_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_oauth_mnesia.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_oauth_rest.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_oauth_rest.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_oauth_sql.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_oauth_sql.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_piefxis.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_piefxis.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_rdbms.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_rdbms.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_receiver.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_receiver.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_redis.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_redis.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_redis_sup.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_redis_sup.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_regexp.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_regexp.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_riak.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_riak.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_riak_sup.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_riak_sup.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_router.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_router.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_router_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_router_mnesia.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_router_multicast.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_router_multicast.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_router_redis.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_router_redis.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_router_sql.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_router_sql.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_s2s.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_s2s.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_s2s_in.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_s2s_in.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_s2s_out.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_s2s_out.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_service.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_service.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_sm.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_sm.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_sm_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_sm_mnesia.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_sm_redis.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_sm_redis.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_sm_sql.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_sm_sql.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_socket.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_socket.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_sql.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_sql.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_sql_pt.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_sql_pt.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_sql_sup.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_sql_sup.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_stun.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_stun.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_sup.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_sup.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_system_monitor.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_system_monitor.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_tmp_sup.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_tmp_sup.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_update.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_update.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_web_admin.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_web_admin.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_web.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_web.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_websocket.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_websocket.beam
+/usr/bin/install -c -m 644 ebin/ejabberd_xmlrpc.beam /usr/local/lib/ejabberd-17.04/ebin/ejabberd_xmlrpc.beam
+/usr/bin/install -c -m 644 ebin/ejd2sql.beam /usr/local/lib/ejabberd-17.04/ebin/ejd2sql.beam
+/usr/bin/install -c -m 644 ebin/eldap.beam /usr/local/lib/ejabberd-17.04/ebin/eldap.beam
+/usr/bin/install -c -m 644 ebin/eldap_filter.beam /usr/local/lib/ejabberd-17.04/ebin/eldap_filter.beam
+/usr/bin/install -c -m 644 ebin/eldap_filter_yecc.beam /usr/local/lib/ejabberd-17.04/ebin/eldap_filter_yecc.beam
+/usr/bin/install -c -m 644 ebin/eldap_pool.beam /usr/local/lib/ejabberd-17.04/ebin/eldap_pool.beam
+/usr/bin/install -c -m 644 ebin/eldap_utils.beam /usr/local/lib/ejabberd-17.04/ebin/eldap_utils.beam
+/usr/bin/install -c -m 644 ebin/ELDAPv3.beam /usr/local/lib/ejabberd-17.04/ebin/ELDAPv3.beam
+/usr/bin/install -c -m 644 ebin/elixir_logger_backend.beam /usr/local/lib/ejabberd-17.04/ebin/elixir_logger_backend.beam
+/usr/bin/install -c -m 644 ebin/extauth.beam /usr/local/lib/ejabberd-17.04/ebin/extauth.beam
+/usr/bin/install -c -m 644 ebin/ext_mod.beam /usr/local/lib/ejabberd-17.04/ebin/ext_mod.beam
+/usr/bin/install -c -m 644 ebin/gen_iq_handler.beam /usr/local/lib/ejabberd-17.04/ebin/gen_iq_handler.beam
+/usr/bin/install -c -m 644 ebin/gen_mod.beam /usr/local/lib/ejabberd-17.04/ebin/gen_mod.beam
+/usr/bin/install -c -m 644 ebin/gen_pubsub_node.beam /usr/local/lib/ejabberd-17.04/ebin/gen_pubsub_node.beam
+/usr/bin/install -c -m 644 ebin/gen_pubsub_nodetree.beam /usr/local/lib/ejabberd-17.04/ebin/gen_pubsub_nodetree.beam
+/usr/bin/install -c -m 644 ebin/jd2ejd.beam /usr/local/lib/ejabberd-17.04/ebin/jd2ejd.beam
+/usr/bin/install -c -m 644 ebin/jlib.beam /usr/local/lib/ejabberd-17.04/ebin/jlib.beam
+/usr/bin/install -c -m 644 ebin/misc.beam /usr/local/lib/ejabberd-17.04/ebin/misc.beam
+/usr/bin/install -c -m 644 ebin/mod_adhoc.beam /usr/local/lib/ejabberd-17.04/ebin/mod_adhoc.beam
+/usr/bin/install -c -m 644 ebin/mod_admin_extra.beam /usr/local/lib/ejabberd-17.04/ebin/mod_admin_extra.beam
+/usr/bin/install -c -m 644 ebin/mod_announce.beam /usr/local/lib/ejabberd-17.04/ebin/mod_announce.beam
+/usr/bin/install -c -m 644 ebin/mod_announce_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_announce_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_announce_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_announce_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_announce_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_announce_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_blocking.beam /usr/local/lib/ejabberd-17.04/ebin/mod_blocking.beam
+/usr/bin/install -c -m 644 ebin/mod_blocking_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_blocking_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_blocking_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_blocking_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_blocking_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_blocking_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_block_strangers.beam /usr/local/lib/ejabberd-17.04/ebin/mod_block_strangers.beam
+/usr/bin/install -c -m 644 ebin/mod_bosh.beam /usr/local/lib/ejabberd-17.04/ebin/mod_bosh.beam
+/usr/bin/install -c -m 644 ebin/mod_bosh_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_bosh_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_bosh_redis.beam /usr/local/lib/ejabberd-17.04/ebin/mod_bosh_redis.beam
+/usr/bin/install -c -m 644 ebin/mod_bosh_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_bosh_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_caps.beam /usr/local/lib/ejabberd-17.04/ebin/mod_caps.beam
+/usr/bin/install -c -m 644 ebin/mod_caps_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_caps_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_caps_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_caps_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_caps_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_caps_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_carboncopy.beam /usr/local/lib/ejabberd-17.04/ebin/mod_carboncopy.beam
+/usr/bin/install -c -m 644 ebin/mod_carboncopy_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_carboncopy_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_carboncopy_redis.beam /usr/local/lib/ejabberd-17.04/ebin/mod_carboncopy_redis.beam
+/usr/bin/install -c -m 644 ebin/mod_carboncopy_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_carboncopy_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_client_state.beam /usr/local/lib/ejabberd-17.04/ebin/mod_client_state.beam
+/usr/bin/install -c -m 644 ebin/mod_configure.beam /usr/local/lib/ejabberd-17.04/ebin/mod_configure.beam
+/usr/bin/install -c -m 644 ebin/mod_delegation.beam /usr/local/lib/ejabberd-17.04/ebin/mod_delegation.beam
+/usr/bin/install -c -m 644 ebin/mod_disco.beam /usr/local/lib/ejabberd-17.04/ebin/mod_disco.beam
+/usr/bin/install -c -m 644 ebin/mod_echo.beam /usr/local/lib/ejabberd-17.04/ebin/mod_echo.beam
+/usr/bin/install -c -m 644 ebin/mod_fail2ban.beam /usr/local/lib/ejabberd-17.04/ebin/mod_fail2ban.beam
+/usr/bin/install -c -m 644 ebin/mod_http_api.beam /usr/local/lib/ejabberd-17.04/ebin/mod_http_api.beam
+/usr/bin/install -c -m 644 ebin/mod_http_fileserver.beam /usr/local/lib/ejabberd-17.04/ebin/mod_http_fileserver.beam
+/usr/bin/install -c -m 644 ebin/mod_http_upload.beam /usr/local/lib/ejabberd-17.04/ebin/mod_http_upload.beam
+/usr/bin/install -c -m 644 ebin/mod_http_upload_quota.beam /usr/local/lib/ejabberd-17.04/ebin/mod_http_upload_quota.beam
+/usr/bin/install -c -m 644 ebin/mod_irc.beam /usr/local/lib/ejabberd-17.04/ebin/mod_irc.beam
+/usr/bin/install -c -m 644 ebin/mod_irc_connection.beam /usr/local/lib/ejabberd-17.04/ebin/mod_irc_connection.beam
+/usr/bin/install -c -m 644 ebin/mod_irc_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_irc_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_irc_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_irc_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_irc_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_irc_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_last.beam /usr/local/lib/ejabberd-17.04/ebin/mod_last.beam
+/usr/bin/install -c -m 644 ebin/mod_last_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_last_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_last_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_last_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_last_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_last_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_legacy_auth.beam /usr/local/lib/ejabberd-17.04/ebin/mod_legacy_auth.beam
+/usr/bin/install -c -m 644 ebin/mod_mam.beam /usr/local/lib/ejabberd-17.04/ebin/mod_mam.beam
+/usr/bin/install -c -m 644 ebin/mod_mam_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_mam_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_mam_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_mam_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_metrics.beam /usr/local/lib/ejabberd-17.04/ebin/mod_metrics.beam
+/usr/bin/install -c -m 644 ebin/mod_mix.beam /usr/local/lib/ejabberd-17.04/ebin/mod_mix.beam
+/usr/bin/install -c -m 644 ebin/mod_muc_admin.beam /usr/local/lib/ejabberd-17.04/ebin/mod_muc_admin.beam
+/usr/bin/install -c -m 644 ebin/mod_muc.beam /usr/local/lib/ejabberd-17.04/ebin/mod_muc.beam
+/usr/bin/install -c -m 644 ebin/mod_muc_log.beam /usr/local/lib/ejabberd-17.04/ebin/mod_muc_log.beam
+/usr/bin/install -c -m 644 ebin/mod_muc_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_muc_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_muc_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_muc_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_muc_room.beam /usr/local/lib/ejabberd-17.04/ebin/mod_muc_room.beam
+/usr/bin/install -c -m 644 ebin/mod_muc_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_muc_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_multicast.beam /usr/local/lib/ejabberd-17.04/ebin/mod_multicast.beam
+/usr/bin/install -c -m 644 ebin/mod_offline.beam /usr/local/lib/ejabberd-17.04/ebin/mod_offline.beam
+/usr/bin/install -c -m 644 ebin/mod_offline_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_offline_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_offline_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_offline_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_offline_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_offline_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_ping.beam /usr/local/lib/ejabberd-17.04/ebin/mod_ping.beam
+/usr/bin/install -c -m 644 ebin/mod_pres_counter.beam /usr/local/lib/ejabberd-17.04/ebin/mod_pres_counter.beam
+/usr/bin/install -c -m 644 ebin/mod_privacy.beam /usr/local/lib/ejabberd-17.04/ebin/mod_privacy.beam
+/usr/bin/install -c -m 644 ebin/mod_privacy_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_privacy_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_privacy_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_privacy_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_privacy_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_privacy_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_private.beam /usr/local/lib/ejabberd-17.04/ebin/mod_private.beam
+/usr/bin/install -c -m 644 ebin/mod_private_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_private_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_private_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_private_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_private_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_private_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_privilege.beam /usr/local/lib/ejabberd-17.04/ebin/mod_privilege.beam
+/usr/bin/install -c -m 644 ebin/mod_proxy65.beam /usr/local/lib/ejabberd-17.04/ebin/mod_proxy65.beam
+/usr/bin/install -c -m 644 ebin/mod_proxy65_lib.beam /usr/local/lib/ejabberd-17.04/ebin/mod_proxy65_lib.beam
+/usr/bin/install -c -m 644 ebin/mod_proxy65_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_proxy65_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_proxy65_redis.beam /usr/local/lib/ejabberd-17.04/ebin/mod_proxy65_redis.beam
+/usr/bin/install -c -m 644 ebin/mod_proxy65_service.beam /usr/local/lib/ejabberd-17.04/ebin/mod_proxy65_service.beam
+/usr/bin/install -c -m 644 ebin/mod_proxy65_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_proxy65_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_proxy65_stream.beam /usr/local/lib/ejabberd-17.04/ebin/mod_proxy65_stream.beam
+/usr/bin/install -c -m 644 ebin/mod_pubsub.beam /usr/local/lib/ejabberd-17.04/ebin/mod_pubsub.beam
+/usr/bin/install -c -m 644 ebin/mod_register.beam /usr/local/lib/ejabberd-17.04/ebin/mod_register.beam
+/usr/bin/install -c -m 644 ebin/mod_register_web.beam /usr/local/lib/ejabberd-17.04/ebin/mod_register_web.beam
+/usr/bin/install -c -m 644 ebin/mod_roster.beam /usr/local/lib/ejabberd-17.04/ebin/mod_roster.beam
+/usr/bin/install -c -m 644 ebin/mod_roster_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_roster_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_roster_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_roster_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_roster_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_roster_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_s2s_dialback.beam /usr/local/lib/ejabberd-17.04/ebin/mod_s2s_dialback.beam
+/usr/bin/install -c -m 644 ebin/mod_service_log.beam /usr/local/lib/ejabberd-17.04/ebin/mod_service_log.beam
+/usr/bin/install -c -m 644 ebin/mod_shared_roster.beam /usr/local/lib/ejabberd-17.04/ebin/mod_shared_roster.beam
+/usr/bin/install -c -m 644 ebin/mod_shared_roster_ldap.beam /usr/local/lib/ejabberd-17.04/ebin/mod_shared_roster_ldap.beam
+/usr/bin/install -c -m 644 ebin/mod_shared_roster_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_shared_roster_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_shared_roster_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_shared_roster_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_shared_roster_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_shared_roster_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_sic.beam /usr/local/lib/ejabberd-17.04/ebin/mod_sic.beam
+/usr/bin/install -c -m 644 ebin/mod_sip.beam /usr/local/lib/ejabberd-17.04/ebin/mod_sip.beam
+/usr/bin/install -c -m 644 ebin/mod_sip_proxy.beam /usr/local/lib/ejabberd-17.04/ebin/mod_sip_proxy.beam
+/usr/bin/install -c -m 644 ebin/mod_sip_registrar.beam /usr/local/lib/ejabberd-17.04/ebin/mod_sip_registrar.beam
+/usr/bin/install -c -m 644 ebin/mod_stats.beam /usr/local/lib/ejabberd-17.04/ebin/mod_stats.beam
+/usr/bin/install -c -m 644 ebin/mod_stream_mgmt.beam /usr/local/lib/ejabberd-17.04/ebin/mod_stream_mgmt.beam
+/usr/bin/install -c -m 644 ebin/mod_time.beam /usr/local/lib/ejabberd-17.04/ebin/mod_time.beam
+/usr/bin/install -c -m 644 ebin/mod_vcard.beam /usr/local/lib/ejabberd-17.04/ebin/mod_vcard.beam
+/usr/bin/install -c -m 644 ebin/mod_vcard_ldap.beam /usr/local/lib/ejabberd-17.04/ebin/mod_vcard_ldap.beam
+/usr/bin/install -c -m 644 ebin/mod_vcard_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_vcard_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_vcard_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_vcard_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_vcard_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_vcard_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_vcard_xupdate.beam /usr/local/lib/ejabberd-17.04/ebin/mod_vcard_xupdate.beam
+/usr/bin/install -c -m 644 ebin/mod_vcard_xupdate_mnesia.beam /usr/local/lib/ejabberd-17.04/ebin/mod_vcard_xupdate_mnesia.beam
+/usr/bin/install -c -m 644 ebin/mod_vcard_xupdate_riak.beam /usr/local/lib/ejabberd-17.04/ebin/mod_vcard_xupdate_riak.beam
+/usr/bin/install -c -m 644 ebin/mod_vcard_xupdate_sql.beam /usr/local/lib/ejabberd-17.04/ebin/mod_vcard_xupdate_sql.beam
+/usr/bin/install -c -m 644 ebin/mod_version.beam /usr/local/lib/ejabberd-17.04/ebin/mod_version.beam
+/usr/bin/install -c -m 644 ebin/node_buddy.beam /usr/local/lib/ejabberd-17.04/ebin/node_buddy.beam
+/usr/bin/install -c -m 644 ebin/node_club.beam /usr/local/lib/ejabberd-17.04/ebin/node_club.beam
+/usr/bin/install -c -m 644 ebin/node_dag.beam /usr/local/lib/ejabberd-17.04/ebin/node_dag.beam
+/usr/bin/install -c -m 644 ebin/node_dispatch.beam /usr/local/lib/ejabberd-17.04/ebin/node_dispatch.beam
+/usr/bin/install -c -m 644 ebin/node_flat.beam /usr/local/lib/ejabberd-17.04/ebin/node_flat.beam
+/usr/bin/install -c -m 644 ebin/node_flat_sql.beam /usr/local/lib/ejabberd-17.04/ebin/node_flat_sql.beam
+/usr/bin/install -c -m 644 ebin/node_hometree.beam /usr/local/lib/ejabberd-17.04/ebin/node_hometree.beam
+/usr/bin/install -c -m 644 ebin/node_hometree_sql.beam /usr/local/lib/ejabberd-17.04/ebin/node_hometree_sql.beam
+/usr/bin/install -c -m 644 ebin/node_mb.beam /usr/local/lib/ejabberd-17.04/ebin/node_mb.beam
+/usr/bin/install -c -m 644 ebin/node_mb_sql.beam /usr/local/lib/ejabberd-17.04/ebin/node_mb_sql.beam
+/usr/bin/install -c -m 644 ebin/node_mix.beam /usr/local/lib/ejabberd-17.04/ebin/node_mix.beam
+/usr/bin/install -c -m 644 ebin/node_mix_sql.beam /usr/local/lib/ejabberd-17.04/ebin/node_mix_sql.beam
+/usr/bin/install -c -m 644 ebin/node_online.beam /usr/local/lib/ejabberd-17.04/ebin/node_online.beam
+/usr/bin/install -c -m 644 ebin/node_pep.beam /usr/local/lib/ejabberd-17.04/ebin/node_pep.beam
+/usr/bin/install -c -m 644 ebin/node_pep_sql.beam /usr/local/lib/ejabberd-17.04/ebin/node_pep_sql.beam
+/usr/bin/install -c -m 644 ebin/node_private.beam /usr/local/lib/ejabberd-17.04/ebin/node_private.beam
+/usr/bin/install -c -m 644 ebin/node_public.beam /usr/local/lib/ejabberd-17.04/ebin/node_public.beam
+/usr/bin/install -c -m 644 ebin/nodetree_dag.beam /usr/local/lib/ejabberd-17.04/ebin/nodetree_dag.beam
+/usr/bin/install -c -m 644 ebin/nodetree_tree.beam /usr/local/lib/ejabberd-17.04/ebin/nodetree_tree.beam
+/usr/bin/install -c -m 644 ebin/nodetree_tree_sql.beam /usr/local/lib/ejabberd-17.04/ebin/nodetree_tree_sql.beam
+/usr/bin/install -c -m 644 ebin/nodetree_virtual.beam /usr/local/lib/ejabberd-17.04/ebin/nodetree_virtual.beam
+/usr/bin/install -c -m 644 ebin/prosody2ejabberd.beam /usr/local/lib/ejabberd-17.04/ebin/prosody2ejabberd.beam
+/usr/bin/install -c -m 644 ebin/pubsub_db_sql.beam /usr/local/lib/ejabberd-17.04/ebin/pubsub_db_sql.beam
+/usr/bin/install -c -m 644 ebin/pubsub_index.beam /usr/local/lib/ejabberd-17.04/ebin/pubsub_index.beam
+/usr/bin/install -c -m 644 ebin/pubsub_migrate.beam /usr/local/lib/ejabberd-17.04/ebin/pubsub_migrate.beam
+/usr/bin/install -c -m 644 ebin/pubsub_subscription.beam /usr/local/lib/ejabberd-17.04/ebin/pubsub_subscription.beam
+/usr/bin/install -c -m 644 ebin/pubsub_subscription_sql.beam /usr/local/lib/ejabberd-17.04/ebin/pubsub_subscription_sql.beam
+/usr/bin/install -c -m 644 ebin/randoms.beam /usr/local/lib/ejabberd-17.04/ebin/randoms.beam
+/usr/bin/install -c -m 644 ebin/rest.beam /usr/local/lib/ejabberd-17.04/ebin/rest.beam
+/usr/bin/install -c -m 644 ebin/scram.beam /usr/local/lib/ejabberd-17.04/ebin/scram.beam
+/usr/bin/install -c -m 644 ebin/shaper.beam /usr/local/lib/ejabberd-17.04/ebin/shaper.beam
+/usr/bin/install -c -m 644 ebin/sql_queries.beam /usr/local/lib/ejabberd-17.04/ebin/sql_queries.beam
+/usr/bin/install -c -m 644 ebin/str.beam /usr/local/lib/ejabberd-17.04/ebin/str.beam
+/usr/bin/install -c -m 644 ebin/translate.beam /usr/local/lib/ejabberd-17.04/ebin/translate.beam
+/usr/bin/install -c -m 644 ebin/win32_dns.beam /usr/local/lib/ejabberd-17.04/ebin/win32_dns.beam
+/usr/bin/install -c -m 644 ebin/XmppAddr.beam /usr/local/lib/ejabberd-17.04/ebin/XmppAddr.beam
+/usr/bin/install -c -m 644 ebin/xmpp_stream_in.beam /usr/local/lib/ejabberd-17.04/ebin/xmpp_stream_in.beam
+/usr/bin/install -c -m 644 ebin/xmpp_stream_out.beam /usr/local/lib/ejabberd-17.04/ebin/xmpp_stream_out.beam
+/usr/bin/install -c -m 644 ebin/xmpp_stream_pkix.beam /usr/local/lib/ejabberd-17.04/ebin/xmpp_stream_pkix.beam
+/usr/bin/install -c -m 644 priv/msgs/ca.msg /usr/local/lib/ejabberd-17.04/priv/msgs/ca.msg
+/usr/bin/install -c -m 644 priv/msgs/cs.msg /usr/local/lib/ejabberd-17.04/priv/msgs/cs.msg
+/usr/bin/install -c -m 644 priv/msgs/de.msg /usr/local/lib/ejabberd-17.04/priv/msgs/de.msg
+/usr/bin/install -c -m 644 priv/msgs/el.msg /usr/local/lib/ejabberd-17.04/priv/msgs/el.msg
+/usr/bin/install -c -m 644 priv/msgs/eo.msg /usr/local/lib/ejabberd-17.04/priv/msgs/eo.msg
+/usr/bin/install -c -m 644 priv/msgs/es.msg /usr/local/lib/ejabberd-17.04/priv/msgs/es.msg
+/usr/bin/install -c -m 644 priv/msgs/fr.msg /usr/local/lib/ejabberd-17.04/priv/msgs/fr.msg
+/usr/bin/install -c -m 644 priv/msgs/gl.msg /usr/local/lib/ejabberd-17.04/priv/msgs/gl.msg
+/usr/bin/install -c -m 644 priv/msgs/he.msg /usr/local/lib/ejabberd-17.04/priv/msgs/he.msg
+/usr/bin/install -c -m 644 priv/msgs/id.msg /usr/local/lib/ejabberd-17.04/priv/msgs/id.msg
+/usr/bin/install -c -m 644 priv/msgs/it.msg /usr/local/lib/ejabberd-17.04/priv/msgs/it.msg
+/usr/bin/install -c -m 644 priv/msgs/ja.msg /usr/local/lib/ejabberd-17.04/priv/msgs/ja.msg
+/usr/bin/install -c -m 644 priv/msgs/nl.msg /usr/local/lib/ejabberd-17.04/priv/msgs/nl.msg
+/usr/bin/install -c -m 644 priv/msgs/no.msg /usr/local/lib/ejabberd-17.04/priv/msgs/no.msg
+/usr/bin/install -c -m 644 priv/msgs/pl.msg /usr/local/lib/ejabberd-17.04/priv/msgs/pl.msg
+/usr/bin/install -c -m 644 priv/msgs/pt-br.msg /usr/local/lib/ejabberd-17.04/priv/msgs/pt-br.msg
+/usr/bin/install -c -m 644 priv/msgs/pt.msg /usr/local/lib/ejabberd-17.04/priv/msgs/pt.msg
+/usr/bin/install -c -m 644 priv/msgs/ru.msg /usr/local/lib/ejabberd-17.04/priv/msgs/ru.msg
+/usr/bin/install -c -m 644 priv/msgs/sk.msg /usr/local/lib/ejabberd-17.04/priv/msgs/sk.msg
+/usr/bin/install -c -m 644 priv/msgs/sv.msg /usr/local/lib/ejabberd-17.04/priv/msgs/sv.msg
+/usr/bin/install -c -m 644 priv/msgs/th.msg /usr/local/lib/ejabberd-17.04/priv/msgs/th.msg
+/usr/bin/install -c -m 644 priv/msgs/tr.msg /usr/local/lib/ejabberd-17.04/priv/msgs/tr.msg
+/usr/bin/install -c -m 644 priv/msgs/uk.msg /usr/local/lib/ejabberd-17.04/priv/msgs/uk.msg
+/usr/bin/install -c -m 644 priv/msgs/vi.msg /usr/local/lib/ejabberd-17.04/priv/msgs/vi.msg
+/usr/bin/install -c -m 644 priv/msgs/wa.msg /usr/local/lib/ejabberd-17.04/priv/msgs/wa.msg
+/usr/bin/install -c -m 644 include/adhoc.hrl /usr/local/lib/ejabberd-17.04/include/adhoc.hrl
+/usr/bin/install -c -m 644 include/bosh.hrl /usr/local/lib/ejabberd-17.04/include/bosh.hrl
+/usr/bin/install -c -m 644 include/ejabberd_commands.hrl /usr/local/lib/ejabberd-17.04/include/ejabberd_commands.hrl
+/usr/bin/install -c -m 644 include/ejabberd_config.hrl /usr/local/lib/ejabberd-17.04/include/ejabberd_config.hrl
+/usr/bin/install -c -m 644 include/ejabberd_ctl.hrl /usr/local/lib/ejabberd-17.04/include/ejabberd_ctl.hrl
+/usr/bin/install -c -m 644 include/ejabberd.hrl /usr/local/lib/ejabberd-17.04/include/ejabberd.hrl
+/usr/bin/install -c -m 644 include/ejabberd_http.hrl /usr/local/lib/ejabberd-17.04/include/ejabberd_http.hrl
+/usr/bin/install -c -m 644 include/ejabberd_oauth.hrl /usr/local/lib/ejabberd-17.04/include/ejabberd_oauth.hrl
+/usr/bin/install -c -m 644 include/ejabberd_router.hrl /usr/local/lib/ejabberd-17.04/include/ejabberd_router.hrl
+/usr/bin/install -c -m 644 include/ejabberd_sm.hrl /usr/local/lib/ejabberd-17.04/include/ejabberd_sm.hrl
+/usr/bin/install -c -m 644 include/ejabberd_sql_pt.hrl /usr/local/lib/ejabberd-17.04/include/ejabberd_sql_pt.hrl
+/usr/bin/install -c -m 644 include/ejabberd_web_admin.hrl /usr/local/lib/ejabberd-17.04/include/ejabberd_web_admin.hrl
+/usr/bin/install -c -m 644 include/eldap.hrl /usr/local/lib/ejabberd-17.04/include/eldap.hrl
+/usr/bin/install -c -m 644 include/ELDAPv3.hrl /usr/local/lib/ejabberd-17.04/include/ELDAPv3.hrl
+/usr/bin/install -c -m 644 include/http_bind.hrl /usr/local/lib/ejabberd-17.04/include/http_bind.hrl
+/usr/bin/install -c -m 644 include/jlib.hrl /usr/local/lib/ejabberd-17.04/include/jlib.hrl
+/usr/bin/install -c -m 644 include/logger.hrl /usr/local/lib/ejabberd-17.04/include/logger.hrl
+/usr/bin/install -c -m 644 include/mod_announce.hrl /usr/local/lib/ejabberd-17.04/include/mod_announce.hrl
+/usr/bin/install -c -m 644 include/mod_caps.hrl /usr/local/lib/ejabberd-17.04/include/mod_caps.hrl
+/usr/bin/install -c -m 644 include/mod_carboncopy.hrl /usr/local/lib/ejabberd-17.04/include/mod_carboncopy.hrl
+/usr/bin/install -c -m 644 include/mod_irc.hrl /usr/local/lib/ejabberd-17.04/include/mod_irc.hrl
+/usr/bin/install -c -m 644 include/mod_last.hrl /usr/local/lib/ejabberd-17.04/include/mod_last.hrl
+/usr/bin/install -c -m 644 include/mod_mam.hrl /usr/local/lib/ejabberd-17.04/include/mod_mam.hrl
+/usr/bin/install -c -m 644 include/mod_muc.hrl /usr/local/lib/ejabberd-17.04/include/mod_muc.hrl
+/usr/bin/install -c -m 644 include/mod_muc_room.hrl /usr/local/lib/ejabberd-17.04/include/mod_muc_room.hrl
+/usr/bin/install -c -m 644 include/mod_offline.hrl /usr/local/lib/ejabberd-17.04/include/mod_offline.hrl
+/usr/bin/install -c -m 644 include/mod_privacy.hrl /usr/local/lib/ejabberd-17.04/include/mod_privacy.hrl
+/usr/bin/install -c -m 644 include/mod_private.hrl /usr/local/lib/ejabberd-17.04/include/mod_private.hrl
+/usr/bin/install -c -m 644 include/mod_proxy65.hrl /usr/local/lib/ejabberd-17.04/include/mod_proxy65.hrl
+/usr/bin/install -c -m 644 include/mod_roster.hrl /usr/local/lib/ejabberd-17.04/include/mod_roster.hrl
+/usr/bin/install -c -m 644 include/mod_shared_roster.hrl /usr/local/lib/ejabberd-17.04/include/mod_shared_roster.hrl
+/usr/bin/install -c -m 644 include/mod_vcard.hrl /usr/local/lib/ejabberd-17.04/include/mod_vcard.hrl
+/usr/bin/install -c -m 644 include/mod_vcard_xupdate.hrl /usr/local/lib/ejabberd-17.04/include/mod_vcard_xupdate.hrl
+/usr/bin/install -c -m 644 include/pubsub.hrl /usr/local/lib/ejabberd-17.04/include/pubsub.hrl
+make[1]: Leaving directory `/software/ejabberd-17.04'
+#
+# Configuration files
+/usr/bin/install -c -d -m 750  /usr/local/etc/ejabberd
+[ -f /usr/local/etc/ejabberd/ejabberd.yml ] \
+		&& /usr/bin/install -c -b -m 640  ejabberd.yml.example /usr/local/etc/ejabberd/ejabberd.yml-new \
+		|| /usr/bin/install -c -b -m 640  ejabberd.yml.example /usr/local/etc/ejabberd/ejabberd.yml
+/bin/sed -e "s*{{rootdir}}*/usr/local*g" \
+		-e "s*{{installuser}}**g" \
+		-e "s*{{bindir}}*/usr/local/bin*g" \
+		-e "s*{{libdir}}*/usr/local/lib*g" \
+		-e "s*{{sysconfdir}}*/usr/local/etc*g" \
+		-e "s*{{localstatedir}}*/usr/local/var*g" \
+		-e "s*{{docdir}}*/usr/local/share/doc/ejabberd*g" \
+		-e "s*{{erl}}*/usr/local/lib/erlang/otp-17.1/bin/erl*g" \
+		-e "s*{{epmd}}*/usr/local/lib/erlang/otp-17.1/bin/epmd*g" ejabberdctl.template \
+		> ejabberdctl.example
+[ -f /usr/local/etc/ejabberd/ejabberdctl.cfg ] \
+		&& /usr/bin/install -c -b -m 640  ejabberdctl.cfg.example /usr/local/etc/ejabberd/ejabberdctl.cfg-new \
+		|| /usr/bin/install -c -b -m 640  ejabberdctl.cfg.example /usr/local/etc/ejabberd/ejabberdctl.cfg
+/usr/bin/install -c -b -m 644  inetrc /usr/local/etc/ejabberd/inetrc
+#
+# Administration script
+[ -d /usr/local/sbin ] || /usr/bin/install -c -d -m 755 /usr/local/sbin
+/usr/bin/install -c -m 550  ejabberdctl.example /usr/local/sbin/ejabberdctl
+# Elixir binaries
+[ -d /usr/local/bin ] || /usr/bin/install -c -d -m 755 /usr/local/bin
+[ -f deps/elixir/bin/iex ] && /usr/bin/install -c -m 550  deps/elixir/bin/iex /usr/local/bin/iex || true
+[ -f deps/elixir/bin/elixir ] && /usr/bin/install -c -m 550  deps/elixir/bin/elixir /usr/local/bin/elixir || true
+[ -f deps/elixir/bin/mix ] && /usr/bin/install -c -m 550  deps/elixir/bin/mix /usr/local/bin/mix || true
+#
+# Init script
+/bin/sed -e "s*@ctlscriptpath@*/usr/local/sbin*g" \
+		-e "s*@installuser@*root*g" ejabberd.init.template \
+		> ejabberd.init
+chmod 755 ejabberd.init
+#
+# Service script
+/bin/sed -e "s*@ctlscriptpath@*/usr/local/sbin*g" ejabberd.service.template \
+		> ejabberd.service
+chmod 644 ejabberd.service
+#
+# Spool directory
+/usr/bin/install -c -d -m 750  /usr/local/var/lib/ejabberd
+echo -R  /usr/local/var/lib/ejabberd >/dev/null
+chmod -R 750 /usr/local/var/lib/ejabberd
+[ ! -f /usr/local/var/lib/ejabberd/.erlang.cookie ] || { echo  /usr/local/var/lib/ejabberd/.erlang.cookie >/dev/null ; chmod 400 /usr/local/var/lib/ejabberd/.erlang.cookie ; }
+#
+# ejabberdctl lock directory
+/usr/bin/install -c -d -m 750  /usr/local/var/lock/ejabberdctl
+echo -R  /usr/local/var/lock/ejabberdctl >/dev/null
+chmod -R 750 /usr/local/var/lock/ejabberdctl
+#
+# Log directory
+/usr/bin/install -c -d -m 750  /usr/local/var/log/ejabberd
+echo -R  /usr/local/var/log/ejabberd >/dev/null
+chmod -R 750 /usr/local/var/log/ejabberd
+#
+# Documentation
+/usr/bin/install -c -d /usr/local/share/doc/ejabberd
+[ -f doc/guide.html ] \
+		&& /usr/bin/install -c -m 644 doc/guide.html /usr/local/share/doc/ejabberd \
+		|| echo "Documentation not included in sources"
+Documentation not included in sources
+/usr/bin/install -c -m 644 COPYING /usr/local/share/doc/ejabberd

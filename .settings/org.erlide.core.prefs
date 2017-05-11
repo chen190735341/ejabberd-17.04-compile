@@ -1,0 +1,9 @@
+#Tue Apr 25 16:49:16 CST 2017
+backend_version=R15B
+eclipse.preferences.version=1
+external_includes=
+external_modules=
+include_dirs=include;
+nukeOutputOnClean=false
+output_dir=ebin
+source_dirs=contrib/extract_translations;deps/cache_tab/src;deps/cache_tab/test;deps/esip/src;deps/ezlib/src;deps/ezlib/test;deps/fast_tls/src;deps/fast_xml/src;deps/fast_xml/test;deps/fast_yaml/src;deps/goldrush/src;deps/iconv/src;deps/jiffy/plugins;deps/jiffy/src;deps/jiffy/test;deps/lager/src;deps/lager/test;deps/luerl/examples/benchmark;deps/luerl/examples/euler;deps/luerl/examples/hello;deps/luerl/examples/minibench;deps/luerl/src;deps/luerl/test;deps/p1_oauth2/src;deps/p1_oauth2/test;deps/p1_utils/src;deps/p1_utils/test;deps/stringprep/src;deps/stringprep/test;deps/stun/src;deps/xmpp/src;plugins;src;test;

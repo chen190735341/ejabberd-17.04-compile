@@ -1,0 +1,19 @@
+[Unit]
+Description=XMPP Server
+After=network.target
+
+[Service]
+Type=forking
+User=ejabberd
+Group=ejabberd
+LimitNOFILE=65536
+Restart=on-failure
+RestartSec=5
+ExecStart=/bin/sh -c '/usr/local/sbin/ejabberdctl start && /usr/local/sbin/ejabberdctl started'
+ExecStop=/bin/sh -c '/usr/local/sbin/ejabberdctl stop && /usr/local/sbin/ejabberdctl stopped'
+ExecReload=/usr/local/sbin/ejabberdctl reload_config
+PrivateDevices=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

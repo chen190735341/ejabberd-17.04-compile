@@ -1,0 +1,551 @@
+rm -rf deps/.got
+rm -rf deps/.built
+/usr/local/lib/erlang/otp-17.1/lib/erlang/bin/escript rebar get-deps && :> deps/.got
+==> goldrush (get-deps)
+==> lager (get-deps)
+==> p1_utils (get-deps)
+==> cache_tab (get-deps)
+==> fast_tls (get-deps)
+==> stringprep (get-deps)
+==> fast_xml (get-deps)
+==> xmpp (get-deps)
+==> stun (get-deps)
+==> esip (get-deps)
+==> fast_yaml (get-deps)
+==> jiffy (get-deps)
+==> p1_oauth2 (get-deps)
+==> luerl (get-deps)
+==> ezlib (get-deps)
+==> iconv (get-deps)
+==> rel (get-deps)
+==> ejabberd-17.04 (get-deps)
+/usr/local/lib/erlang/otp-17.1/lib/erlang/bin/escript rebar compile && :> deps/.built
+==> goldrush (compile)
+Compiled src/gre.erl
+Compiled src/gr_param_sup.erl
+Compiled src/glc.erl
+Compiled src/glc_ops.erl
+Compiled src/gr_sup.erl
+Compiled src/gr_counter_sup.erl
+Compiled src/glc_lib.erl
+Compiled src/gr_manager_sup.erl
+Compiled src/gr_manager.erl
+Compiled src/gr_param.erl
+Compiled src/gr_counter.erl
+Compiled src/gr_context.erl
+Compiled src/gr_app.erl
+Compiled src/glc_code.erl
+==> lager (compile)
+Compiled src/lager_util.erl
+Compiled src/lager_transform.erl
+Compiled src/lager_handler_watcher_sup.erl
+Compiled src/lager_trunc_io.erl
+Compiled src/lager_crash_log.erl
+Compiled src/lager_format.erl
+Compiled src/lager_config.erl
+Compiled src/lager_common_test_backend.erl
+Compiled src/lager_sup.erl
+Compiled src/error_logger_lager_h.erl
+Compiled src/lager_manager_killer.erl
+Compiled src/lager.erl
+Compiled src/lager_console_backend.erl
+Compiled src/lager_msg.erl
+Compiled src/lager_handler_watcher.erl
+Compiled src/lager_app.erl
+Compiled src/lager_stdlib.erl
+Compiled src/lager_backend_throttle.erl
+Compiled src/lager_default_formatter.erl
+Compiled src/lager_file_backend.erl
+==> p1_utils (compile)
+Compiled src/p1_server.erl
+Compiled src/p1_utils_sup.erl
+Compiled src/p1_utils.erl
+Compiled src/p1_http.erl
+Compiled src/treap.erl
+Compiled src/p1_queue.erl
+Compiled src/p1_time_compat.erl
+Compiled src/p1_fsm.erl
+Compiled src/p1_nif_utils.erl
+Compiled src/p1_file_queue.erl
+Compiled src/p1_edoc_layout.erl
+==> cache_tab (compile)
+Compiled src/cache_tab_sup.erl
+Compiled src/cache_tab_app.erl
+Compiled src/cache_tab.erl
+==> fast_tls (compile)
+Compiled src/fast_tls_app.erl
+Compiled src/p1_sha.erl
+Compiled src/fast_tls_sup.erl
+Compiled src/fast_tls.erl
+Compiling c_src/fast_tls_drv.c
+Compiling c_src/p1_sha.c
+==> stringprep (compile)
+Compiled src/stringprep_sup.erl
+Compiled src/stringprep.erl
+Compiled src/stringprep_app.erl
+Compiling c_src/stringprep.cpp
+==> fast_xml (compile)
+Compiled src/fxml_gen_pt.erl
+Compiled src/fast_xml.erl
+Compiled src/fxml_stream.erl
+Compiled src/fxmlrpc.erl
+Compiled src/fxml_sup.erl
+Compiled src/fxml.erl
+Compiled src/fxmlrpc_codec.erl
+Compiled src/fxml_gen.erl
+Compiling c_src/fxml.c
+Compiling c_src/fxml_stream.c
+==> xmpp (compile)
+Compiled src/xep0352.erl
+Compiled src/xep0066.erl
+Compiled src/xep0313.erl
+Compiled src/xep0131.erl
+Compiled src/xep0085.erl
+Compiled src/rfc3921.erl
+Compiled src/xep0355.erl
+Compiled src/muc_roomconfig.erl
+Compiled src/xep0153.erl
+Compiled src/xep0172.erl
+Compiled src/xmpp_codec_external.erl
+Compiled src/pubsub_get_pending.erl
+Compiled src/muc_request.erl
+Compiled src/xep0191.erl
+Compiled src/xep0054.erl
+Compiled src/xmpp_util.erl
+Compiled src/xep0264.erl
+Compiled src/xep0202.erl
+Compiled src/muc_register.erl
+Compiled src/xep0356.erl
+Compiled src/xep0023.erl
+Compiled src/xmpp_codec.erl
+Compiled src/xep0115.erl
+Compiled src/xep0369.erl
+Compiled src/xep0060.erl
+Compiled src/xep0045.erl
+Compiled src/xep0359.erl
+Compiled src/xep0022.erl
+Compiled src/xep0004.erl
+Compiled src/xep0297.erl
+Compiled src/xep0199.erl
+Compiled src/jid.erl
+Compiled src/pubsub_subscribe_options.erl
+Compiled src/rfc6121.erl
+Compiled src/xep0363.erl
+Compiled src/xep0077.erl
+Compiled src/xmpp.erl
+Compiled src/xep0016.erl
+Compiled src/xep0039.erl
+Compiled src/p1_mucsub.erl
+Compiled src/pubsub_subscribe_authorization.erl
+Compiled src/xep0334.erl
+Compiled src/xep0138.erl
+Compiled src/xep0055.erl
+Compiled src/xep0033.erl
+Compiled src/xep0065.erl
+Compiled src/xmpp_tr.erl
+Compiled src/xep0013.erl
+Compiled src/xep0012.erl
+Compiled src/xep0050.erl
+Compiled src/xep0249.erl
+Compiled src/pubsub_node_config.erl
+Compiled src/xep0048.erl
+Compiled src/rfc6120.erl
+Compiled src/mam_query.erl
+Compiled src/xep0279.erl
+Compiled src/xep0049.erl
+Compiled src/xep0221.erl
+Compiled src/xep0114.erl
+Compiled src/flex_offline.erl
+Compiled src/muc_roominfo.erl
+Compiled src/xep0198.erl
+Compiled src/xep0231.erl
+Compiled src/xep0059.erl
+Compiled src/xep0203.erl
+Compiled src/xep0158.erl
+Compiled src/xep0220.erl
+Compiled src/xep0280.erl
+Compiled src/xep0092.erl
+Compiled src/xep0078.erl
+Compiled src/pubsub_publish_options.erl
+Compiled src/p1_stream.erl
+Compiled src/xep0030.erl
+Compiled src/xdata_codec.erl
+==> stun (compile)
+Compiled src/turn_tmp_sup.erl
+Compiled src/turn_sm.erl
+Compiled src/stun_shaper.erl
+Compiled src/turn.erl
+Compiled src/stun.erl
+Compiled src/stun_sup.erl
+Compiled src/stun_app.erl
+Compiled src/stun_tmp_sup.erl
+Compiled src/stun_test.erl
+Compiled src/stun_listener.erl
+Compiled src/stun_codec.erl
+==> esip (compile)
+Compiled src/esip_listener.erl
+Compiled src/esip_udp_sup.erl
+Compiled src/esip_dialog.erl
+Compiled src/esip_tmp_sup.erl
+Compiled src/esip_client_transaction.erl
+Compiled src/esip_transport.erl
+Compiled src/esip_codec.erl
+Compiled src/esip_sup.erl
+Compiled src/esip_transaction.erl
+Compiled src/esip_server_transaction.erl
+Compiled src/esip_app.erl
+Compiled src/esip_socket.erl
+Compiled src/esip.erl
+Compiling c_src/esip_codec.c
+==> fast_yaml (compile)
+Compiled src/fast_yaml_sup.erl
+Compiled src/fast_yaml_app.erl
+Compiled src/fast_yaml.erl
+Compiling c_src/fast_yaml.c
+==> jiffy (compile)
+Compiled src/jiffy_utf8.erl
+Compiled src/jiffy.erl
+Compiling c_src/decoder.c
+Compiling c_src/encoder.c
+Compiling c_src/jiffy.c
+Compiling c_src/utf8.c
+Compiling c_src/util.c
+Compiling c_src/doubles.cc
+Compiling c_src/double-conversion/bignum-dtoa.cc
+Compiling c_src/double-conversion/bignum.cc
+Compiling c_src/double-conversion/cached-powers.cc
+Compiling c_src/double-conversion/diy-fp.cc
+Compiling c_src/double-conversion/double-conversion.cc
+Compiling c_src/double-conversion/fast-dtoa.cc
+Compiling c_src/double-conversion/fixed-dtoa.cc
+Compiling c_src/double-conversion/strtod.cc
+==> p1_oauth2 (compile)
+Compiled src/oauth2_token_generation.erl
+Compiled src/oauth2_backend.erl
+Compiled src/oauth2_token.erl
+Compiled src/oauth2_config.erl
+Compiled src/oauth2_response.erl
+Compiled src/oauth2_priv_set.erl
+Compiled src/oauth2.erl
+==> luerl (compile)
+Compiled src/luerl_scan.xrl
+Compiled src/luerl_parse.yrl
+Compiled src/luerl_lib.erl
+Compiled src/luerl_scan.erl
+Compiled src/luerl_parse.erl
+Compiled src/luerl_lib_string_format.erl
+Compiled src/luerl_app.erl
+Compiled src/luerl_lib_table.erl
+Compiled src/luerl_lib_bit32.erl
+Compiled src/luerl_lib_io.erl
+Compiled src/luerl_lib_string.erl
+Compiled src/luerl_lib_package.erl
+Compiled src/luerl_comp.erl
+Compiled src/luerl_comp_cg.erl
+Compiled src/luerl_comp_peep.erl
+Compiled src/luerl_sup.erl
+Compiled src/luerl_lib_basic.erl
+Compiled src/luerl_lib_math.erl
+Compiled src/luerl.erl
+Compiled src/luerl_comp_locf.erl
+Compiled src/luerl_lib_os.erl
+Compiled src/luerl_comp_vars.erl
+Compiled src/luerl_emul.erl
+Compiled src/ttdict.erl
+Compiled src/luerl_comp_env.erl
+==> ezlib (compile)
+Compiled src/ezlib_sup.erl
+Compiled src/ezlib_app.erl
+Compiled src/ezlib.erl
+Compiling c_src/ezlib_drv.c
+==> iconv (compile)
+Compiled src/iconv.erl
+Compiled src/iconv_app.erl
+Compiled src/iconv_sup.erl
+Compiling c_src/iconv.c
+==> rel (compile)
+==> ejabberd-17.04 (compile)
+Compiled asn1/XmppAddr.asn1
+Compiled src/eldap_filter_yecc.yrl
+Compiled src/ejabberd_config.erl
+Compiled src/gen_mod.erl
+Compiled src/mod_muc_room.erl
+Compiled src/ejabberd_sql_pt.erl
+Compiled src/mod_roster.erl
+Compiled src/gen_pubsub_node.erl
+Compiled src/mod_muc.erl
+Compiled src/ejabberd_socket.erl
+Compiled src/cyrsasl.erl
+Compiled src/mod_mam.erl
+Compiled src/mod_caps.erl
+Compiled src/mod_bosh.erl
+Compiled src/mod_shared_roster.erl
+Compiled src/mod_last.erl
+Compiled src/gen_pubsub_nodetree.erl
+Compiled src/mod_blocking.erl
+Compiled src/mod_offline.erl
+Compiled src/mod_private.erl
+Compiled src/ejabberd_auth.erl
+Compiled src/mod_irc.erl
+Compiled src/mod_announce.erl
+Compiled src/mod_carboncopy.erl
+Compiled src/xmpp_stream_in.erl
+Compiled src/mod_vcard_xupdate.erl
+Compiled src/ejabberd_sm.erl
+Compiled src/xmpp_stream_out.erl
+Compiled src/mod_proxy65.erl
+src/mod_vcard.erl:34: Warning: undefined callback function reload/3 (behaviour 'gen_mod')
+Compiled src/mod_vcard.erl
+Compiled src/mod_privacy.erl
+Compiled src/eldap_filter_yecc.erl
+Compiled src/ejabberd_router.erl
+Compiled src/mod_last_mnesia.erl
+Compiled src/ejabberd_auth_external.erl
+Compiled src/acl.erl
+Compiled src/ejabberd_auth_anonymous.erl
+Compiled src/mod_proxy65_stream.erl
+Compiled src/jd2ejd.erl
+Compiled src/str.erl
+Compiled src/node_mb_sql.erl
+Compiled src/elixir_logger_backend.erl
+Compiled src/mod_private_mnesia.erl
+Compiled src/mod_client_state.erl
+Compiled src/ejabberd_ctl.erl
+Compiled src/mod_caps_riak.erl
+Compiled src/mod_s2s_dialback.erl
+Compiled src/mod_pres_counter.erl
+Compiled src/mod_fail2ban.erl
+Compiled src/mod_last_riak.erl
+Compiled src/mod_http_api.erl
+Compiled src/ejabberd_update.erl
+Compiled src/mod_stream_mgmt.erl
+Compiled src/ejabberd_sm_redis.erl
+Compiled src/mod_private_riak.erl
+Compiled src/pubsub_db_sql.erl
+Compiled src/ejabberd_router_redis.erl
+Compiled src/mod_legacy_auth.erl
+Compiled src/ejabberd_auth_mnesia.erl
+src/mod_http_upload_quota.erl:34: Warning: undefined callback function reload/3 (behaviour 'gen_mod')
+Compiled src/mod_http_upload_quota.erl
+Compiled src/cyrsasl_oauth.erl
+Compiled src/jlib.erl
+Compiled src/ejabberd_sql_sup.erl
+Compiled src/nodetree_tree_sql.erl
+Compiled src/pubsub_subscription.erl
+Compiled src/mod_delegation.erl
+Compiled src/prosody2ejabberd.erl
+Compiled src/scram.erl
+Compiled src/ejabberd_redis.erl
+Compiled src/ext_mod.erl
+Compiled src/mod_configure.erl
+Compiled src/mod_block_strangers.erl
+Compiled src/ELDAPv3.erl
+Compiled src/mod_private_sql.erl
+Compiled src/eldap_pool.erl
+Compiled src/sql_queries.erl
+Compiled src/ejabberd_redis_sup.erl
+Compiled src/eldap_utils.erl
+Compiled src/mod_blocking_riak.erl
+Compiled src/shaper.erl
+Compiled src/ejabberd_sup.erl
+Compiled src/mod_ping.erl
+Compiled src/mod_privacy_mnesia.erl
+Compiled src/mod_proxy65_sql.erl
+Compiled src/mod_blocking_sql.erl
+Compiled src/mod_offline_mnesia.erl
+Compiled src/rest.erl
+Compiled src/ejabberd_listener.erl
+Compiled src/node_mix.erl
+Compiled src/ejabberd_sm_sql.erl
+Compiled src/eldap.erl
+Compiled src/ejabberd_rdbms.erl
+Compiled src/ejabberd_idna.erl
+Compiled src/ejabberd_receiver.erl
+Compiled src/node_public.erl
+src/mod_mix.erl:28: Warning: undefined callback function reload/3 (behaviour 'gen_mod')
+Compiled src/mod_mix.erl
+Compiled src/mod_muc_riak.erl
+Compiled src/node_online.erl
+Compiled src/win32_dns.erl
+Compiled src/ejabberd_sql.erl
+Compiled src/mod_bosh_mnesia.erl
+Compiled src/cyrsasl_scram.erl
+Compiled src/mod_roster_mnesia.erl
+Compiled src/ejabberd_sm_mnesia.erl
+Compiled src/eldap_filter.erl
+Compiled src/ejabberd_router_multicast.erl
+Compiled src/mod_vcard_sql.erl
+Compiled src/ejabberd_system_monitor.erl
+Compiled src/mod_time.erl
+Compiled src/node_mix_sql.erl
+Compiled src/ejabberd_bosh.erl
+Compiled src/mod_offline_sql.erl
+Compiled src/ejabberd_http.erl
+Compiled src/ejabberd_tmp_sup.erl
+Compiled src/mod_bosh_sql.erl
+Compiled src/ejabberd.erl
+Compiled src/mod_caps_sql.erl
+Compiled src/mod_vcard_xupdate_sql.erl
+Compiled src/ejabberd_oauth_sql.erl
+Compiled src/ejabberd_regexp.erl
+Compiled src/pubsub_index.erl
+src/mod_shared_roster_ldap.erl:33: Warning: undefined callback function reload/3 (behaviour 'gen_mod')
+Compiled src/mod_shared_roster_ldap.erl
+Compiled src/mod_disco.erl
+Compiled src/ejabberd_piefxis.erl
+Compiled src/mod_mam_mnesia.erl
+Compiled src/mod_irc_mnesia.erl
+Compiled src/pubsub_subscription_sql.erl
+Compiled src/ejabberd_oauth_rest.erl
+Compiled src/ejabberd_local.erl
+Compiled src/node_dag.erl
+Compiled src/ejabberd_access_permissions.erl
+Compiled src/mod_privilege.erl
+Compiled src/nodetree_tree.erl
+Compiled src/mod_offline_riak.erl
+Compiled src/ejabberd_hooks.erl
+Compiled src/mod_muc_sql.erl
+Compiled src/mod_carboncopy_redis.erl
+Compiled src/mod_proxy65_redis.erl
+Compiled src/cyrsasl_plain.erl
+Compiled src/node_private.erl
+Compiled src/mod_sip_proxy.erl
+src/ejabberd_s2s_in.erl:23: Warning: undefined callback function bind/2 (behaviour 'xmpp_stream_in')
+src/ejabberd_s2s_in.erl:23: Warning: undefined callback function check_password_digest_fun/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_s2s_in.erl:23: Warning: undefined callback function check_password_fun/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_s2s_in.erl:23: Warning: undefined callback function get_password_fun/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_s2s_in.erl:23: Warning: undefined callback function handle_timeout/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_s2s_in.erl:23: Warning: undefined callback function handle_unbinded_packet/2 (behaviour 'xmpp_stream_in')
+src/ejabberd_s2s_in.erl:23: Warning: undefined callback function sasl_mechanisms/2 (behaviour 'xmpp_stream_in')
+Compiled src/ejabberd_s2s_in.erl
+Compiled src/mod_register.erl
+Compiled src/mod_blocking_mnesia.erl
+Compiled src/ejd2sql.erl
+Compiled src/ejabberd_websocket.erl
+Compiled src/ejabberd_auth_pam.erl
+Compiled src/gen_iq_handler.erl
+Compiled src/mod_muc_log.erl
+Compiled src/mod_proxy65_mnesia.erl
+Compiled src/ejabberd_app.erl
+Compiled src/mod_irc_riak.erl
+Compiled src/xmpp_stream_pkix.erl
+Compiled src/mod_caps_mnesia.erl
+Compiled src/ejabberd_s2s.erl
+Compiled src/nodetree_virtual.erl
+Compiled src/ejabberd_web_admin.erl
+Compiled src/mod_vcard_mnesia.erl
+Compiled src/mod_adhoc.erl
+Compiled src/ejabberd_mnesia.erl
+Compiled src/ejabberd_riak_sup.erl
+src/mod_pubsub.erl:35: Warning: undefined callback function reload/3 (behaviour 'gen_mod')
+Compiled src/mod_pubsub.erl
+Compiled src/mod_version.erl
+Compiled src/XmppAddr.erl
+Compiled src/cyrsasl_anonymous.erl
+Compiled src/ejabberd_cluster.erl
+Compiled src/ejabberd_auth_riak.erl
+src/mod_http_upload.erl:63: Warning: undefined callback function reload/3 (behaviour 'gen_mod')
+Compiled src/mod_http_upload.erl
+Compiled src/mod_shared_roster_sql.erl
+Compiled src/mod_vcard_riak.erl
+Compiled src/mod_proxy65_service.erl
+Compiled src/ejabberd_riak.erl
+Compiled src/mod_multicast.erl
+Compiled src/mod_vcard_xupdate_riak.erl
+Compiled src/mod_carboncopy_mnesia.erl
+src/ejabberd_s2s_out.erl:23: Warning: undefined callback function handle_authenticated_features/2 (behaviour 'xmpp_stream_out')
+src/ejabberd_s2s_out.erl:23: Warning: undefined callback function handle_stream_start/2 (behaviour 'xmpp_stream_out')
+src/ejabberd_s2s_out.erl:23: Warning: undefined callback function handle_unauthenticated_features/2 (behaviour 'xmpp_stream_out')
+Compiled src/ejabberd_s2s_out.erl
+Compiled src/cyrsasl_digest.erl
+Compiled src/mod_metrics.erl
+Compiled src/ejabberd_commands.erl
+Compiled src/mod_last_sql.erl
+Compiled src/ejabberd_admin.erl
+Compiled src/node_hometree.erl
+Compiled src/node_mb.erl
+Compiled src/ejabberd_oauth_mnesia.erl
+Compiled src/mod_bosh_redis.erl
+src/mod_service_log.erl:30: Warning: undefined callback function reload/3 (behaviour 'gen_mod')
+Compiled src/mod_service_log.erl
+Compiled src/mod_shared_roster_mnesia.erl
+Compiled src/mod_muc_admin.erl
+Compiled src/ejabberd_http_ws.erl
+Compiled src/ejabberd_router_mnesia.erl
+Compiled src/ejabberd_auth_sql.erl
+Compiled src/ejabberd_auth_ldap.erl
+Compiled src/ejabberd_stun.erl
+Compiled src/mod_proxy65_lib.erl
+Compiled src/node_buddy.erl
+Compiled src/mod_sip_registrar.erl
+Compiled src/misc.erl
+Compiled src/ejabberd_captcha.erl
+Compiled src/mod_sic.erl
+Compiled src/node_hometree_sql.erl
+Compiled src/mod_vcard_ldap.erl
+Compiled src/mod_shared_roster_riak.erl
+Compiled src/mod_register_web.erl
+Compiled src/mod_mam_sql.erl
+Compiled src/mod_http_fileserver.erl
+Compiled src/mod_announce_riak.erl
+Compiled src/mod_echo.erl
+Compiled src/ejabberd_xmlrpc.erl
+Compiled src/mod_vcard_xupdate_mnesia.erl
+Compiled src/mod_announce_sql.erl
+Compiled src/ejabberd_c2s_config.erl
+Compiled src/mod_admin_extra.erl
+Compiled src/mod_stats.erl
+Compiled src/ejabberd_backend_sup.erl
+Compiled src/node_club.erl
+Compiled src/ejabberd_router_sql.erl
+Compiled src/translate.erl
+Compiled src/mod_roster_riak.erl
+Compiled src/node_flat.erl
+Compiled src/mod_privacy_sql.erl
+Compiled src/extauth.erl
+Compiled src/mod_sip.erl
+Compiled src/mod_carboncopy_sql.erl
+Compiled src/pubsub_migrate.erl
+src/ejabberd_service.erl:23: Warning: undefined callback function authenticated_stream_features/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function bind/2 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function check_password_digest_fun/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function check_password_fun/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function compress_methods/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function handle_call/3 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function handle_cast/2 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function handle_cdata/2 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function handle_recv/3 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function handle_send/3 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function handle_stream_end/2 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function handle_stream_established/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function handle_timeout/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function handle_unauthenticated_packet/2 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function handle_unbinded_packet/2 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function sasl_mechanisms/2 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function tls_enabled/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function tls_required/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function tls_verify/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_service.erl:23: Warning: undefined callback function unauthenticated_stream_features/1 (behaviour 'xmpp_stream_in')
+Compiled src/ejabberd_service.erl
+Compiled src/ejabberd_logger.erl
+src/ejabberd_c2s.erl:23: Warning: undefined callback function handle_stream_established/1 (behaviour 'xmpp_stream_in')
+src/ejabberd_c2s.erl:23: Warning: undefined callback function handle_timeout/1 (behaviour 'xmpp_stream_in')
+Compiled src/ejabberd_c2s.erl
+Compiled src/mod_privacy_riak.erl
+Compiled src/mod_irc_connection.erl
+Compiled src/ejabberd_oauth.erl
+Compiled src/node_pep_sql.erl
+Compiled src/mod_muc_mnesia.erl
+Compiled src/mod_announce_mnesia.erl
+Compiled src/nodetree_dag.erl
+Compiled src/node_flat_sql.erl
+Compiled src/node_dispatch.erl
+Compiled src/randoms.erl
+Compiled src/mod_roster_sql.erl
+Compiled src/mod_irc_sql.erl
+Compiled src/ejabberd_web.erl
+Compiled src/node_pep.erl
+Compiled src/ejabberd_commands_doc.erl
+/usr/local/lib/erlang/otp-17.1/lib/erlang/bin/escript rebar skip_deps=true compile
+==> rel (compile)
+==> ejabberd-17.04 (compile)

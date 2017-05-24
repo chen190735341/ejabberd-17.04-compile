@@ -179,12 +179,28 @@ stream_header(Config) ->
 		  db_xmlns = ?config(db_xmlns, Config),
 		  stream_xmlns = ?config(ns_stream, Config)}.
 
+%% 连接
 connect(Config) ->
     NewConfig = init_stream(Config),
     case ?config(type, NewConfig) of
 	client -> process_stream_features(NewConfig);
 	server -> process_stream_features(NewConfig);
 	component -> NewConfig
+    end.
+
+%% 初始化流
+init_stream(Config) ->
+    Version = ?config(stream_version, Config),
+    NewConfig = tcp_connect(Config),
+    send(NewConfig, stream_header(NewConfig)),
+    XMLNS = case ?config(type, Config) of
+		client -> ?NS_CLIENT;
+		component -> ?NS_COMPONENT;
+		server -> ?NS_SERVER
+	    end,
+    receive
+	#stream_start{id = ID, xmlns = XMLNS, version = Version} ->
+	    set_opt(stream_id, ID, NewConfig)
     end.
 
 tcp_connect(Config) ->
@@ -207,20 +223,7 @@ tcp_connect(Config) ->
 	    Config
     end.
 
-init_stream(Config) ->
-    Version = ?config(stream_version, Config),
-    NewConfig = tcp_connect(Config),
-    send(NewConfig, stream_header(NewConfig)),
-    XMLNS = case ?config(type, Config) of
-		client -> ?NS_CLIENT;
-		component -> ?NS_COMPONENT;
-		server -> ?NS_SERVER
-	    end,
-    receive
-	#stream_start{id = ID, xmlns = XMLNS, version = Version} ->
-	    set_opt(stream_id, ID, NewConfig)
-    end.
-
+%%流特性更新
 process_stream_features(Config) ->
     receive
 	#stream_features{sub_els = Fs} ->
@@ -244,6 +247,7 @@ process_stream_features(Config) ->
 	      end, set_opt(mechs, Mechs, Config), Fs)
     end.
 
+%% 断开连接
 disconnect(Config) ->
     ct:comment("Disconnecting"),
     Socket = ?config(socket, Config),
@@ -263,6 +267,7 @@ close_socket(Config) ->
     ejabberd_socket:close(Socket),
     Config.
 
+%% tls连接
 starttls(Config) ->
     starttls(Config, false).
 
@@ -280,15 +285,17 @@ starttls(Config, ShouldFail) ->
 				?config(socket, Config),
 				[{certfile, ?config(certfile, Config)},
 				 connect]),
-	    set_opt(socket, TLSSocket, Config)
+		process_stream_features(init_stream(set_opt(socket, TLSSocket, Config)))
     end.
 
+%% zlib设置
 zlib(Config) ->
     send(Config, #compress{methods = [<<"zlib">>]}),
     receive #compressed{} -> ok end,
     {ok, ZlibSocket} = ejabberd_socket:compress(?config(socket, Config)),
     process_stream_features(init_stream(set_opt(socket, ZlibSocket, Config))).
 
+%% 登录
 auth(Config) ->
     auth(Config, false).
 
@@ -316,6 +323,7 @@ auth(Config, ShouldFail) ->
 	    ct:fail(no_known_sasl_mechanism_available)
     end.
 
+%% 资源绑定
 bind(Config) ->
     U = ?config(user, Config),
     S = ?config(server, Config),
@@ -337,6 +345,7 @@ bind(Config) ->
 	    Config
     end.
 
+%% 开启session
 open_session(Config) ->
     open_session(Config, false).
 

@@ -47,6 +47,7 @@ start(normal, _Args) ->
     write_pid_file(),
 	%% 启动依赖应用lib
     start_apps(),
+	%% 启动万能应用？？有待深入了解
     start_elixir_application(),
     ejabberd:check_app(ejabberd),
 	%%启动mnesia数据库
@@ -95,6 +96,7 @@ stop(_State) ->
 %%% Internal functions
 %%%
 
+%%数据库初始化
 db_init() ->
     ejabberd_config:env_binary_to_list(mnesia, dir),
     MyNode = node(),
@@ -118,6 +120,7 @@ db_init() ->
     ejabberd:start_app(mnesia, permanent),
     mnesia:wait_for_tables(mnesia:system_info(local_tables), infinity).
 
+%% 连接集群其他节点
 connect_nodes() ->
     Nodes = ejabberd_config:get_option(
               cluster_nodes,
@@ -188,16 +191,21 @@ file_queue_init() ->
 	       end,
     p1_queue:start(QueueDir).
 
+%%启动依赖应用
 start_apps() ->
     crypto:start(),
     ejabberd:start_app(sasl),
     ejabberd:start_app(ssl),
 	%% 启动解析配置文件应用
     ejabberd:start_app(fast_yaml),
+	%%启动tls连接应用
     ejabberd:start_app(fast_tls),
+	%% 启动xmpp协议相关应用
     ejabberd:start_app(xmpp),
+	%% 缓存？
     ejabberd:start_app(cache_tab).
 
+%% 参数检查方法
 opt_type(net_ticktime) ->
     fun (P) when is_integer(P), P > 0 -> P end;
 opt_type(cluster_nodes) ->

@@ -283,7 +283,7 @@ init([#{server := LServer, remote_server := RServer} = State, Opts]) ->
 		     {_, N} -> N;
 		     false -> unlimited
 		 end,
-    State1 = State#{on_route => queue,
+    State1 = State#{on_route => queue,	%% queue排队等待状态，send直接发送状态，bounce 停止发送，返回错误
 		    queue => p1_queue:new(QueueType, QueueLimit),
 		    xmlns => ?NS_SERVER,
 		    lang => ?MYLANG,
@@ -304,6 +304,7 @@ handle_cast({update_state, Fun}, State) ->
 handle_cast(Msg, #{server_host := ServerHost} = State) ->
     ejabberd_hooks:run_fold(s2s_out_handle_cast, ServerHost, State, [Msg]).
 
+%% 发送包要看状态
 handle_info({route, Pkt}, #{queue := Q, on_route := Action} = State) ->
     case Action of
 	queue ->

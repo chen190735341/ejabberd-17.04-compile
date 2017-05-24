@@ -85,6 +85,7 @@
 start_link() ->
     ?GEN_SERVER:start_link({local, ?MODULE}, ?MODULE, [], []).
 
+%% 数据包路由
 -spec route(stanza()) -> ok.
 route(Packet) ->
     try do_route(Packet)
@@ -281,6 +282,10 @@ code_change(_OldVsn, State, _Extra) ->
 %%--------------------------------------------------------------------
 %%% Internal functions
 %%--------------------------------------------------------------------
+
+%% 消息包路由：检查目标域是否是本地的域
+%% 是本地域(ejabberd_local)，在同一个节点上，直接调用域注册的路由方法，否则send到节点上再执行路由方法(ejabberd_local:route/1)。
+%% 不是同一个域则调用ejabberd_s2s:route(Packet) 去实现路由
 -spec do_route(stanza()) -> ok.
 do_route(OrigPacket) ->
     ?DEBUG("route:~n~s", [xmpp:pp(OrigPacket)]),
@@ -315,6 +320,7 @@ do_route(Pkt, #route{local_hint = LocalHint,
 do_route(_Pkt, _Route) ->
     ok.
 
+%% 均衡路由
 -spec balancing_route(jid(), jid(), stanza(), [#route{}]) -> any().
 balancing_route(From, To, Packet, Rs) ->
     LDstDomain = To#jid.lserver,

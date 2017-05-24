@@ -150,12 +150,38 @@ get_env_config() ->
             application:get_env(ejabberd, file)
     end.
 
+%% 重新加载配置文件
+-spec reload_file() -> ok.
+reload_file() ->
+    Config = get_ejabberd_config_path(),
+    OldHosts = get_myhosts(),
+    State = load_file(Config),
+    set_opts(State),
+    NewHosts = get_myhosts(),
+    lists:foreach(
+      fun(Host) ->
+	      ejabberd_hooks:run(host_up, [Host])
+      end, NewHosts -- OldHosts),
+    lists:foreach(
+      fun(Host) ->
+	      ejabberd_hooks:run(host_down, [Host])
+      end, OldHosts -- NewHosts),
+    ejabberd_hooks:run(config_reloaded, []).
+
+%% 读取配置文件数据，生成#state{},检查数据
+-spec load_file(string()) -> #state{}.
+load_file(File) ->
+	%%读取配置文件数据,生成#state{}
+    State0 = read_file(File),
+    State1 = hosts_to_start(State0),
+	%% 检查配置数据是否合法
+    validate_opts(State1).
+
 %% @doc Read the ejabberd configuration file.
 %% It also includes additional configuration files and replaces macros.
 %% This function will crash if finds some error in the configuration file.
-%% @spec (File::string()) -> #state{}
-
 %% 读取配置文件数据,生成#state{}（读取指定的配置文件和模块配置文件，替换配置数据中的宏,转换配置数据,查找设置hosts,整理hosts和global配置数据）
+%% @spec (File::string()) -> #state{}
 read_file(File) ->
     read_file(File, [{replace_macros, true},
                      {include_files, true},
@@ -195,40 +221,12 @@ read_file(File, Opts) ->
 	%%　合并相同host和global相同数据项
     State1#state{opts = compact(State1#state.opts)}.
 
--spec load_file(string()) -> #state{}.
-
-%% 读取配置文件数据，生成#state{},检查数据
-load_file(File) ->
-	%%读取配置文件数据,生成#state{}
-    State0 = read_file(File),
-    State1 = hosts_to_start(State0),
-	%% 检查配置数据是否合法
-    validate_opts(State1).
-
--spec reload_file() -> ok.
-
-%% 重新加载配置文件
-reload_file() ->
-    Config = get_ejabberd_config_path(),
-    OldHosts = get_myhosts(),
-    State = load_file(Config),
-    set_opts(State),
-    NewHosts = get_myhosts(),
-    lists:foreach(
-      fun(Host) ->
-	      ejabberd_hooks:run(host_up, [Host])
-      end, NewHosts -- OldHosts),
-    lists:foreach(
-      fun(Host) ->
-	      ejabberd_hooks:run(host_down, [Host])
-      end, OldHosts -- NewHosts),
-    ejabberd_hooks:run(config_reloaded, []).
-
 -spec convert_to_yaml(file:filename()) -> ok | {error, any()}.
 
 convert_to_yaml(File) ->
     convert_to_yaml(File, stdout).
 
+%% erlang term转换成yaml写入文件
 -spec convert_to_yaml(file:filename(),
                       stdout | file:filename()) -> ok | {error, any()}.
 
@@ -269,9 +267,8 @@ env_binary_to_list(Application, Parameter) ->
 %% Returns a list of plain terms,
 %% in which the options 'include_config_file' were parsed
 %% and the terms in those files were included.
-%% @spec(iolist()) -> [term()]
-
 %% 读取主配置文件和模块配置文件
+%% @spec(iolist()) -> [term()]
 get_plain_terms_file(File, Opts) when is_binary(File) ->
     get_plain_terms_file(binary_to_list(File), Opts);
 get_plain_terms_file(File1, Opts) ->
@@ -313,6 +310,7 @@ get_plain_terms_file(File1, Opts) ->
       end
     end.
 
+%% 读取文件 根据文件后缀读取文件内容，并将文件内容转换为erlang term
 consult(File) ->
     case filename:extension(File) of
         Ex when (Ex == ".yml") or (Ex == ".yaml") ->
@@ -349,6 +347,7 @@ consult(File) ->
             end
     end.
 
+%%处理erlang数据
 parserl(<<"> ", Term/binary>>) ->
     {ok, A2, _} = erl_scan:string(binary_to_list(Term)),
     {ok, A3} = erl_parse:parse_term(A2),
@@ -375,7 +374,9 @@ get_absolute_path(File) ->
 	    filename:absname(File)
     end.
 
-%% 查找hosts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 查找更新hosts信息
+
 search_hosts(Term, State) ->
     case Term of
 	{host, Host} ->
@@ -400,6 +401,7 @@ search_hosts(Term, State) ->
 	    State
     end.
 
+%% 更新{host,global}信息
 set_hosts_in_options(Hosts, State) ->
     PrepHosts = normalize_hosts(Hosts),
     NewOpts = lists:filter(fun({local_config,{hosts,global},_}) -> false;
@@ -424,6 +426,7 @@ normalize_hosts([Host|Hosts], PrepHosts) ->
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Errors reading the config file
+%%% 错误处理
 
 describe_config_problem(Filename, Reason) ->
     Text1 = lists:flatten("Problem loading ejabberd config file " ++ Filename),
@@ -477,65 +480,9 @@ exit_or_halt(ExitText) ->
 %%% Support for 'include_config_file'
 %%% 引入配置文件数据的读取和合并
 
-get_config_option_key(Name, Val) ->
-    if Name == listen ->
-            case Val of
-                {{Port, IP, Trans}, _Mod, _Opts} ->
-                    {Port, IP, Trans};
-                {{Port, Trans}, _Mod, _Opts} when Trans == tcp; Trans == udp ->
-                    {Port, {0,0,0,0}, Trans};
-                {{Port, IP}, _Mod, _Opts} ->
-                    {Port, IP, tcp};
-                {Port, _Mod, _Opts} ->
-                    {Port, {0,0,0,0}, tcp};
-                V when is_list(V) ->
-                    lists:foldl(
-                      fun({port, Port}, {_, IP, T}) ->
-                              {Port, IP, T};
-                         ({ip, IP}, {Port, _, T}) ->
-                              {Port, IP, T};
-                         ({transport, T}, {Port, IP, _}) ->
-                              {Port, IP, T};
-                         (_, Res) ->
-                              Res
-                      end, {5222, {0,0,0,0}, tcp}, Val)
-            end;
-       is_tuple(Val) ->
-            element(1, Val);
-       true ->
-            Val
-    end.
-
-maps_to_lists(IMap) ->
-    maps:fold(fun(Name, Map, Res) when Name == host_config orelse Name == append_host_config ->
-                      [{Name, [{Host, maps_to_lists(SMap)} || {Host,SMap} <- maps:values(Map)]} | Res];
-                 (Name, Map, Res) when is_map(Map) ->
-                      [{Name, maps:values(Map)} | Res];
-                 (Name, Val, Res) ->
-                      [{Name, Val} | Res]
-              end, [], IMap).
-
-merge_configs(Terms, ResMap) ->
-    lists:foldl(fun({Name, Val}, Map) when is_list(Val), Name =/= auth_method ->
-                        Old = maps:get(Name, Map, #{}),
-                        New = lists:foldl(fun(SVal, OMap) ->
-                                                  NVal = if Name == host_config orelse Name == append_host_config ->
-                                                                 {Host, Opts} = SVal,
-                                                                 {_, SubMap} = maps:get(Host, OMap, {Host, #{}}),
-                                                                 {Host, merge_configs(Opts, SubMap)};
-                                                            true ->
-                                                                 SVal
-                                                         end,
-                                                  maps:put(get_config_option_key(Name, SVal), NVal, OMap)
-                                          end, Old, Val),
-                        maps:put(Name, New, Map);
-                   ({Name, Val}, Map) ->
-                        maps:put(Name, Val, Map)
-                end, ResMap, Terms).
-
+%% 读取引入的配置文件，并合并配置数据
 %% @doc Include additional configuration files in the list of terms.
 %% @spec ([term()]) -> [term()]
-%% 读取引入的配置文件，并合并配置数据
 include_config_files(Terms) ->
     {FileOpts, Terms1} =
         lists:mapfoldl(
@@ -614,6 +561,63 @@ keep_only_allowed(Allowed, Terms) ->
      || NA <- NAs],
     As.
 
+%% 合并数据
+merge_configs(Terms, ResMap) ->
+    lists:foldl(fun({Name, Val}, Map) when is_list(Val), Name =/= auth_method ->
+                        Old = maps:get(Name, Map, #{}),
+                        New = lists:foldl(fun(SVal, OMap) ->
+                                                  NVal = if Name == host_config orelse Name == append_host_config ->
+                                                                 {Host, Opts} = SVal,
+                                                                 {_, SubMap} = maps:get(Host, OMap, {Host, #{}}),
+                                                                 {Host, merge_configs(Opts, SubMap)};
+                                                            true ->
+                                                                 SVal
+                                                         end,
+                                                  maps:put(get_config_option_key(Name, SVal), NVal, OMap)
+                                          end, Old, Val),
+                        maps:put(Name, New, Map);
+                   ({Name, Val}, Map) ->
+                        maps:put(Name, Val, Map)
+                end, ResMap, Terms).
+
+%% 处理配置数据的key
+get_config_option_key(Name, Val) ->
+    if Name == listen ->
+            case Val of
+                {{Port, IP, Trans}, _Mod, _Opts} ->
+                    {Port, IP, Trans};
+                {{Port, Trans}, _Mod, _Opts} when Trans == tcp; Trans == udp ->
+                    {Port, {0,0,0,0}, Trans};
+                {{Port, IP}, _Mod, _Opts} ->
+                    {Port, IP, tcp};
+                {Port, _Mod, _Opts} ->
+                    {Port, {0,0,0,0}, tcp};
+                V when is_list(V) ->
+                    lists:foldl(
+                      fun({port, Port}, {_, IP, T}) ->
+                              {Port, IP, T};
+                         ({ip, IP}, {Port, _, T}) ->
+                              {Port, IP, T};
+                         ({transport, T}, {Port, IP, _}) ->
+                              {Port, IP, T};
+                         (_, Res) ->
+                              Res
+                      end, {5222, {0,0,0,0}, tcp}, Val)
+            end;
+       is_tuple(Val) ->
+            element(1, Val);
+       true ->
+            Val
+    end.
+
+maps_to_lists(IMap) ->
+    maps:fold(fun(Name, Map, Res) when Name == host_config orelse Name == append_host_config ->
+                      [{Name, [{Host, maps_to_lists(SMap)} || {Host,SMap} <- maps:values(Map)]} | Res];
+                 (Name, Map, Res) when is_map(Map) ->
+                      [{Name, maps:values(Map)} | Res];
+                 (Name, Val, Res) ->
+                      [{Name, Val} | Res]
+              end, [], IMap).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Support for Macro
@@ -741,6 +745,57 @@ process_host_term(Term, Host, State, Action) ->
             State
     end.
 
+
+%% module替换
+replace_modules(Modules) ->
+    lists:map(
+        fun({Module, Opts}) ->
+                case replace_module(Module) of
+                    {NewModule, DBType} ->
+                        emit_deprecation_warning(Module, NewModule, DBType),
+                        NewOpts = [{db_type, DBType} |
+                                   lists:keydelete(db_type, 1, Opts)],
+                        {NewModule, transform_module_options(Module, NewOpts)};
+                    NewModule ->
+                        if Module /= NewModule ->
+                                emit_deprecation_warning(Module, NewModule);
+                           true ->
+                                ok
+                        end,
+                        {NewModule, transform_module_options(Module, Opts)}
+                end
+        end, Modules).
+
+replace_module(mod_announce_odbc) -> {mod_announce, sql};
+replace_module(mod_blocking_odbc) -> {mod_blocking, sql};
+replace_module(mod_caps_odbc) -> {mod_caps, sql};
+replace_module(mod_irc_odbc) -> {mod_irc, sql};
+replace_module(mod_last_odbc) -> {mod_last, sql};
+replace_module(mod_muc_odbc) -> {mod_muc, sql};
+replace_module(mod_offline_odbc) -> {mod_offline, sql};
+replace_module(mod_privacy_odbc) -> {mod_privacy, sql};
+replace_module(mod_private_odbc) -> {mod_private, sql};
+replace_module(mod_roster_odbc) -> {mod_roster, sql};
+replace_module(mod_shared_roster_odbc) -> {mod_shared_roster, sql};
+replace_module(mod_vcard_odbc) -> {mod_vcard, sql};
+replace_module(mod_vcard_ldap) -> {mod_vcard, ldap};
+replace_module(mod_vcard_xupdate_odbc) -> {mod_vcard_xupdate, sql};
+replace_module(mod_pubsub_odbc) -> {mod_pubsub, sql};
+replace_module(mod_http_bind) -> mod_bosh;
+replace_module(Module) ->
+    case is_elixir_module(Module) of
+        true  -> expand_elixir_module(Module);
+        false -> Module
+    end.
+
+transform_module_options(Module, Opts) ->
+    Opts1 = gen_iq_handler:transform_module_options(Opts),
+    try
+        Module:transform_module_options(Opts1)
+    catch error:undef ->
+            Opts1
+    end.
+
 rename_option(Option) when is_atom(Option) ->
     case atom_to_list(Option) of
 	"odbc_" ++ T ->
@@ -788,6 +843,10 @@ append_option({Opt, Host}, Val, State) ->
              end,
     set_option({Opt, Host}, NewVal, State).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 配置数据操作，增删改查
+
+%% 配置数据入库
 set_opts(State) ->
     Opts = State#state.opts,
     F = fun() ->
@@ -924,6 +983,57 @@ has_option(Opt) ->
 %%% Process terms
 %% 获取default db type
 
+%% 检查配置文件数据是否合法
+validate_opts(#state{opts = Opts} = State) ->
+    ModOpts = get_modules_with_options(),
+    NewOpts = lists:filtermap(
+		fun(#local_config{key = {Opt, _Host}, value = Val} = In) ->
+			case dict:find(Opt, ModOpts) of
+			    {ok, [Mod|_]} ->
+				VFun = Mod:opt_type(Opt),
+				try VFun(Val) of
+				    _ ->
+					true
+				catch {replace_with, NewVal} ->
+					{true, In#local_config{value = NewVal}};
+				      {invalid_syntax, Error} ->
+					?ERROR_MSG("ignoring option '~s' with "
+						   "invalid value: ~p: ~s",
+						   [Opt, Val, Error]),
+					false;
+				      _:_ ->
+					?ERROR_MSG("ignoring option '~s' with "
+						   "invalid value: ~p",
+						   [Opt, Val]),
+					false
+				end;
+			    _ ->
+				?ERROR_MSG("unknown option '~s' will be likely"
+					   " ignored", [Opt]),
+				true
+			end
+		end, Opts),
+    State#state{opts = NewOpts}.
+
+%% 获取所有模块需要的参数的模块及其参数名，返回[{opt,[mod]}]
+get_modules_with_options() ->
+    {ok, Mods} = application:get_key(ejabberd, modules),
+    ExtMods = [Name || {Name, _Details} <- ext_mod:installed()],
+    AllMods = [?MODULE|ExtMods++Mods],
+    init_module_db_table(AllMods),
+    lists:foldl(
+      fun(Mod, D) ->
+	      case catch Mod:opt_type('') of
+		  Opts when is_list(Opts) ->
+		      lists:foldl(
+			fun(Opt, Acc) ->
+				dict:append(Opt, Mod, Acc)
+			end, D, Opts);
+		  {'EXIT', {undef, _}} ->
+		      D
+	      end
+      end, dict:new(), AllMods).
+
 %% 根据后缀把模块名拆分
 init_module_db_table(Modules) ->
     catch ets:new(module_db, [named_table, public, bag,
@@ -944,15 +1054,6 @@ init_module_db_table(Modules) ->
 	      end
       end, Modules).
 
--spec v_db(module(), atom()) -> atom().
-
-v_db(Mod, internal) -> v_db(Mod, mnesia);
-v_db(Mod, odbc) -> v_db(Mod, sql);
-v_db(Mod, Type) ->
-    case ets:match_object(module_db, {Mod, Type}) of
-	[_|_] -> Type;
-	[] -> erlang:error(badarg)
-    end.
 
 -spec v_dbs(module()) -> [atom()].
 
@@ -961,6 +1062,7 @@ v_dbs(Mod) ->
 
 -spec v_dbs_mods(module()) -> [module()].
 
+%% 返回模块对应的各种db的模块
 v_dbs_mods(Mod) ->
     lists:map(fun([M]) ->
 		      binary_to_atom(<<(atom_to_binary(Mod, utf8))/binary, "_",
@@ -1001,56 +1103,15 @@ default_db(Opt, Host, Module) ->
 	    end
     end.
 
-%% 获取所有模块需要的参数的模块及其参数名，返回[{opt,[mod]}]
-get_modules_with_options() ->
-    {ok, Mods} = application:get_key(ejabberd, modules),
-    ExtMods = [Name || {Name, _Details} <- ext_mod:installed()],
-    AllMods = [?MODULE|ExtMods++Mods],
-    init_module_db_table(AllMods),
-    lists:foldl(
-      fun(Mod, D) ->
-	      case catch Mod:opt_type('') of
-		  Opts when is_list(Opts) ->
-		      lists:foldl(
-			fun(Opt, Acc) ->
-				dict:append(Opt, Mod, Acc)
-			end, D, Opts);
-		  {'EXIT', {undef, _}} ->
-		      D
-	      end
-      end, dict:new(), AllMods).
+-spec v_db(module(), atom()) -> atom().
+v_db(Mod, internal) -> v_db(Mod, mnesia);
+v_db(Mod, odbc) -> v_db(Mod, sql);
+v_db(Mod, Type) ->
+    case ets:match_object(module_db, {Mod, Type}) of
+	[_|_] -> Type;
+	[] -> erlang:error(badarg)
+    end.
 
-%% 检查配置文件数据是否合法
-validate_opts(#state{opts = Opts} = State) ->
-    ModOpts = get_modules_with_options(),
-    NewOpts = lists:filtermap(
-		fun(#local_config{key = {Opt, _Host}, value = Val} = In) ->
-			case dict:find(Opt, ModOpts) of
-			    {ok, [Mod|_]} ->
-				VFun = Mod:opt_type(Opt),
-				try VFun(Val) of
-				    _ ->
-					true
-				catch {replace_with, NewVal} ->
-					{true, In#local_config{value = NewVal}};
-				      {invalid_syntax, Error} ->
-					?ERROR_MSG("ignoring option '~s' with "
-						   "invalid value: ~p: ~s",
-						   [Opt, Val, Error]),
-					false;
-				      _:_ ->
-					?ERROR_MSG("ignoring option '~s' with "
-						   "invalid value: ~p",
-						   [Opt, Val]),
-					false
-				end;
-			    _ ->
-				?ERROR_MSG("unknown option '~s' will be likely"
-					   " ignored", [Opt]),
-				true
-			end
-		end, Opts),
-    State#state{opts = NewOpts}.
 
 -spec get_vh_by_auth_method(atom()) -> [binary()].
 
@@ -1106,46 +1167,6 @@ get_mylang() ->
       fun iolist_to_binary/1,
       <<"en">>).
 
-replace_module(mod_announce_odbc) -> {mod_announce, sql};
-replace_module(mod_blocking_odbc) -> {mod_blocking, sql};
-replace_module(mod_caps_odbc) -> {mod_caps, sql};
-replace_module(mod_irc_odbc) -> {mod_irc, sql};
-replace_module(mod_last_odbc) -> {mod_last, sql};
-replace_module(mod_muc_odbc) -> {mod_muc, sql};
-replace_module(mod_offline_odbc) -> {mod_offline, sql};
-replace_module(mod_privacy_odbc) -> {mod_privacy, sql};
-replace_module(mod_private_odbc) -> {mod_private, sql};
-replace_module(mod_roster_odbc) -> {mod_roster, sql};
-replace_module(mod_shared_roster_odbc) -> {mod_shared_roster, sql};
-replace_module(mod_vcard_odbc) -> {mod_vcard, sql};
-replace_module(mod_vcard_ldap) -> {mod_vcard, ldap};
-replace_module(mod_vcard_xupdate_odbc) -> {mod_vcard_xupdate, sql};
-replace_module(mod_pubsub_odbc) -> {mod_pubsub, sql};
-replace_module(mod_http_bind) -> mod_bosh;
-replace_module(Module) ->
-    case is_elixir_module(Module) of
-        true  -> expand_elixir_module(Module);
-        false -> Module
-    end.
-
-replace_modules(Modules) ->
-    lists:map(
-        fun({Module, Opts}) ->
-                case replace_module(Module) of
-                    {NewModule, DBType} ->
-                        emit_deprecation_warning(Module, NewModule, DBType),
-                        NewOpts = [{db_type, DBType} |
-                                   lists:keydelete(db_type, 1, Opts)],
-                        {NewModule, transform_module_options(Module, NewOpts)};
-                    NewModule ->
-                        if Module /= NewModule ->
-                                emit_deprecation_warning(Module, NewModule);
-                           true ->
-                                ok
-                        end,
-                        {NewModule, transform_module_options(Module, Opts)}
-                end
-        end, Modules).
 
 %% Elixir module naming
 %% ====================
@@ -1236,7 +1257,9 @@ format_term(S) when is_list(S), S /= [] ->
 format_term(T) ->
     io_lib:format("~p", [binary_to_strings(T)]).
 
-%%　针对不同模块转换配置数据
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% transform_terms 
+%%%　针对不同模块转换配置数据
 transform_terms(Terms) ->
     %% We could check all ejabberd beams, but this
     %% slows down start-up procedure :(
@@ -1262,13 +1285,6 @@ transform_terms([Mod|Mods], Terms) ->
 transform_terms([], NewTerms) ->
     NewTerms.
 
-transform_module_options(Module, Opts) ->
-    Opts1 = gen_iq_handler:transform_module_options(Opts),
-    try
-        Module:transform_module_options(Opts1)
-    catch error:undef ->
-            Opts1
-    end.
 
 %% 合并host和global相同项数据
 compact(Cfg) ->
@@ -1295,7 +1311,6 @@ split_by_hosts(Opts) ->
     case lists:keytake(global, 1, Opts1) of
         {value, {global, GlobalOpts}, HostOpts} ->
             {GlobalOpts, HostOpts};
-		
         _ ->
             {[], Opts1}
     end.

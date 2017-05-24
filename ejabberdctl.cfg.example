@@ -1,7 +1,7 @@
 #
 # In this file you can configure options that are passed by ejabberdctl
 # to the erlang runtime system when starting ejabberd
-#
+#	erlang运行时系统参数配置文件（具体含义参考erlang文档）
 
 #' POLL: Kernel polling ([true|false])
 #

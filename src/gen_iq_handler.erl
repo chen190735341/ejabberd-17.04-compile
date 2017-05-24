@@ -110,8 +110,8 @@ stop_iq_handler(_Module, _Function, Opts) ->
       _ -> ok
     end.
 
+%%处理iq节
 -spec handle(binary(), atom(), atom(), opts(), iq()) -> any().
-
 handle(Host, Module, Function, Opts, IQ) ->
     case Opts of
 	no_queue ->

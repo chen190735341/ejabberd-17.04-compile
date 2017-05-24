@@ -499,6 +499,7 @@ is_password_scram_valid(Password, Scram) ->
 	    misc:decode_base64(Scram#scram.storedkey) == StoredKey
     end.
 
+%% 导出
 export(_Server) ->
     [{passwd,
       fun(Host, #passwd{us = {LUser, LServer}, password = Password})
@@ -522,6 +523,7 @@ export(_Server) ->
               []
       end}].
 
+%% 导入
 import(LServer, [LUser, Password, _TimeStamp]) ->
     mnesia:dirty_write(
       #passwd{us = {LUser, LServer}, password = Password}).

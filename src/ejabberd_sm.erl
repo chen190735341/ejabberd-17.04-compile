@@ -667,13 +667,13 @@ clean_session_list(Ss) ->
 clean_session_list([], Res) -> Res;
 clean_session_list([S], Res) -> [S | Res];
 clean_session_list([S1, S2 | Rest], Res) ->
-    if S1#session.usr == S2#session.usr ->
-	   if S1#session.sid > S2#session.sid ->
-		  clean_session_list([S1 | Rest], Res);
-	      true -> clean_session_list([S2 | Rest], Res)
-	   end;
-       true -> clean_session_list([S2 | Rest], [S1 | Res])
-    end.
+	if S1#session.usr == S2#session.usr ->
+		   if S1#session.sid > S2#session.sid ->
+				  clean_session_list([S1 | Rest], Res);
+			  true -> clean_session_list([S2 | Rest], Res)
+		   end;
+	   true -> clean_session_list([S2 | Rest], [S1 | Res])
+	end.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -705,8 +705,8 @@ check_existing_resources(LUser, LServer, LResource) ->
 			 SIDs)
     end.
 
+%% 资源是否已存在
 -spec is_existing_resource(binary(), binary(), binary()) -> boolean().
-
 is_existing_resource(LUser, LServer, LResource) ->
     [] /= get_resource_sessions(LUser, LServer, LResource).
 
@@ -718,6 +718,7 @@ get_resource_sessions(User, Server, Resource) ->
     Mod = get_sm_backend(LServer),
     [S#session.sid || S <- online(Mod:get_sessions(LUser, LServer, LResource))].
 
+%%检查是否超出了max_sessions,如果超出踢掉最早的
 -spec check_max_sessions(binary(), binary()) -> ok | replaced.
 check_max_sessions(LUser, LServer) ->
     Mod = get_sm_backend(LServer),

@@ -61,6 +61,7 @@ start_link() ->
     gen_server:start_link({local, ?MODULE}, ?MODULE, Opts,
 			  []).
 
+%% 处理admin_jid发来的设置请求，并返回消息给admin_jid
 -spec process_command(stanza()) -> ok.
 process_command(#message{from = From, to = To, body = Body}) ->
     case To of
@@ -102,11 +103,11 @@ unregister_hook(Host) ->
 %% Description: Initiates the server
 %%--------------------------------------------------------------------
 init(Opts) ->
-	%% 设置进程优先级和堆大小
+	%% 设置进程优先级和监控堆大小
     LH = proplists:get_value(large_heap, Opts),
     process_flag(priority, high),
     erlang:system_monitor(self(), [{large_heap, LH}]),
-	%% 注册hook
+	%% 注册节点启动项hook
     ejabberd_hooks:add(host_up, ?MODULE, register_hook, 50),
     ejabberd_hooks:add(host_down, ?MODULE, unregister_hook, 60),
     lists:foreach(fun register_hook/1, ?MYHOSTS),
@@ -155,6 +156,8 @@ handle_cast(_Msg, State) -> {noreply, State}.
 %%                                       {stop, Reason, State}
 %% Description: Handling all non call/cast messages
 %%--------------------------------------------------------------------
+
+%% 收到有进程内存申请过多，发送报告给admin_jids
 handle_info({monitor, Pid, large_heap, Info}, State) ->
     spawn(fun () ->
 		  process_flag(priority, high),

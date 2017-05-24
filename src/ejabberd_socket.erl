@@ -88,6 +88,7 @@
 %%====================================================================
 -spec start(atom(), sockmod(), socket(), [proplists:property()])
       -> {ok, pid() | independent} | {error, inet:posix() | any()}.
+%% 收到连接，启动socket receive 和业务模块
 start(Module, SockMod, Socket, Opts) ->
 	case Module:socket_type() of
 		independent -> {ok, independent};

@@ -146,30 +146,23 @@ register_mechanism(Mechanism, Module, PasswordType) ->
 		     #sasl_mechanism{mechanism = Mechanism, module = Module,
 			       password_type = PasswordType}).
 
-check_credentials(_State, Props) ->
-    User = proplists:get_value(authzid, Props, <<>>),
-    case jid:nodeprep(User) of
-      error -> {error, nodeprep_failed};
-      <<"">> -> {error, empty_username};
-      _LUser -> ok
-    end.
-
 -spec listmech(Host ::binary()) -> Mechanisms::mechanisms().
 
 listmech(Host) ->
     ets:select(sasl_mechanism,
 		       [{#sasl_mechanism{mechanism = '$1',
 					 password_type = '$2', _ = '_'},
-			 case catch ejabberd_auth:store_type(Host) of
-			   external -> [{'==', '$2', plain}];
-			   scram -> [{'/=', '$2', digest}];
-			   {'EXIT', {undef, [{Module, store_type, []} | _]}} ->
-			       ?WARNING_MSG("~p doesn't implement the function store_type/0",
-					    [Module]),
-			       [];
-			   _Else -> []
-			 end,
-		 ['$1']}]).
+				 case catch ejabberd_auth:store_type(Host) of
+					 external -> [{'==', '$2', plain}];
+					 scram -> [{'/=', '$2', digest}];
+					 {'EXIT', {undef, [{Module, store_type, []} | _]}} ->
+						 ?WARNING_MSG("~p doesn't implement the function store_type/0",
+									  [Module]),
+						 [];
+					 _Else -> []
+				 end,
+				 ['$1']}]
+			  ).
 
 -spec server_new(binary(), binary(), binary(), term(),
 		 fun(), fun(), fun()) -> sasl_state().
@@ -223,6 +216,14 @@ server_step(State, ClientIn) ->
             {error, Error, Username};
         {error, Error} ->
             {error, Error, <<"">>}
+    end.
+
+check_credentials(_State, Props) ->
+    User = proplists:get_value(authzid, Props, <<>>),
+    case jid:nodeprep(User) of
+      error -> {error, nodeprep_failed};
+      <<"">> -> {error, empty_username};
+      _LUser -> ok
     end.
 
 -spec get_mech(sasl_state()) -> binary().

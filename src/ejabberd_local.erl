@@ -78,6 +78,7 @@ start_link() ->
     gen_server:start_link({local, ?MODULE}, ?MODULE, [],
 			  []).
 
+%%处理收到的iq节信息
 -spec process_iq(iq()) -> any().
 process_iq(#iq{to = To, type = T, lang = Lang, sub_els = [El]} = Packet)
   when T == get; T == set ->
@@ -111,6 +112,7 @@ process_iq_reply(#iq{id = ID} = IQ) ->
       _ -> nothing
     end.
 
+%%发送包
 -spec route(stanza()) -> any().
 route(Packet) ->
     try do_route(Packet)
@@ -119,6 +121,7 @@ route(Packet) ->
 		       [xmpp:pp(Packet), {E, {R, erlang:get_stacktrace()}}])
     end.
 
+%%发送iq包
 -spec route_iq(iq(), function()) -> any().
 route_iq(IQ, F) ->
     route_iq(IQ, F, undefined).
@@ -157,15 +160,15 @@ register_iq_response_handler(_Host, ID, Module,
 				    function = Function,
 				    timer = TRef}).
 
+-spec unregister_iq_response_handler(binary(), binary()) -> ok.
+unregister_iq_response_handler(_Host, ID) ->
+    catch get_iq_callback(ID), ok.
+
 -spec register_iq_handler(binary(), binary(), module(), function(),
 			  gen_iq_handler:opts()) -> ok.
 register_iq_handler(Host, XMLNS, Module, Fun, Opts) ->
     gen_server:cast(?MODULE,
 		    {register_iq_handler, Host, XMLNS, Module, Fun, Opts}).
-
--spec unregister_iq_response_handler(binary(), binary()) -> ok.
-unregister_iq_response_handler(_Host, ID) ->
-    catch get_iq_callback(ID), ok.
 
 -spec unregister_iq_handler(binary(), binary()) -> ok.
 unregister_iq_handler(Host, XMLNS) ->
@@ -252,21 +255,23 @@ code_change(_OldVsn, State, _Extra) ->
 %%--------------------------------------------------------------------
 %%% Internal functions
 %%--------------------------------------------------------------------
+
+%% 本地路由处理
 -spec do_route(stanza()) -> any().
 do_route(Packet) ->
     ?DEBUG("local route:~n~s", [xmpp:pp(Packet)]),
     Type = xmpp:get_type(Packet),
     To = xmpp:get_to(Packet),
-    if To#jid.luser /= <<"">> ->
-	    ejabberd_sm:route(Packet);
-       is_record(Packet, iq), To#jid.lresource == <<"">> ->
-	    process_iq(Packet);
-       Type == result; Type == error ->
-	    ok;
-       true ->
-	    ejabberd_hooks:run(local_send_to_resource_hook,
-			       To#jid.lserver, [Packet])
-    end.
+	if To#jid.luser /= <<"">> ->
+		   ejabberd_sm:route(Packet);
+	   is_record(Packet, iq), To#jid.lresource == <<"">> ->
+		   process_iq(Packet);
+	   Type == result; Type == error ->
+		   ok;
+	   true ->
+		   ejabberd_hooks:run(local_send_to_resource_hook,
+							  To#jid.lserver, [Packet])
+	end.
 
 -spec update_table() -> ok.
 update_table() ->

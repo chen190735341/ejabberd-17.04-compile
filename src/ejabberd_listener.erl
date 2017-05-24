@@ -75,6 +75,37 @@ start_listeners() ->
 	      supervisor:start_child(?MODULE, Spec)
       end, listeners_childspec()).
 
+%% 配置文件重新加载
+config_reloaded() ->
+    New = case ejabberd_config:get_option(listen, fun validate_cfg/1) of
+	      undefined -> [];
+	      Ls -> Ls
+	  end,
+    Old = ets:tab2list(?MODULE),
+    lists:foreach(
+      fun({PortIP, Module, _Opts}) ->
+	      case lists:keyfind(PortIP, 1, New) of
+		  false ->
+		      stop_listener(PortIP, Module);
+		  _ ->
+		      ok
+	      end
+      end, Old),
+    lists:foreach(
+      fun({PortIP, Module, Opts}) ->
+	      case lists:keyfind(PortIP, 1, Old) of
+		  {_, Module, Opts} ->
+		      ok;
+		  {_, OldModule, _} ->
+		      stop_listener(PortIP, OldModule),
+		      ets:insert(?MODULE, {PortIP, Module, Opts}),
+		      start_listener(PortIP, Module, Opts);
+		  false ->
+		      ets:insert(?MODULE, {PortIP, Module, Opts}),
+		      start_listener(PortIP, Module, Opts)
+	      end
+      end, New).
+
 %% 检查重复端口配置
 report_duplicated_portips(L) ->
     LKeys = [Port || {Port, _, _} <- L],
@@ -185,6 +216,18 @@ listen_tcp(PortIP, Module, SockOpts, Port, IPS) ->
 	    socket_error(Reason, PortIP, Module, SockOpts, Port, IPS)
     end.
 
+%%在ejabberd_sup监督进程下启动listen模块的sup,listen模块启动策略simple_one_for_one
+start_module_sup(_Port, Module) ->
+    Proc1 = gen_mod:get_module_proc(<<"sup">>, Module),
+    ChildSpec1 =
+	{Proc1,
+	 {ejabberd_tmp_sup, start_link, [Proc1, Module]},
+	 permanent,
+	 infinity,
+	 supervisor,
+	 [ejabberd_tmp_sup]},
+    supervisor:start_child(ejabberd_sup, ChildSpec1).
+
 %% @spec (PortIP, Opts) -> {Port, IPT, IPS, IPV, OptsClean}
 %% where
 %%      PortIP = Port | {Port, IPT | IPS}
@@ -269,6 +312,24 @@ get_ip_tuple(no_ip_option, inet6) ->
 get_ip_tuple(IPOpt, _IPVOpt) ->
     IPOpt.
 
+udp_recv(Socket, Module, Opts) ->
+    case gen_udp:recv(Socket, 0) of
+	{ok, {Addr, Port, Packet}} ->
+	    case catch Module:udp_recv(Socket, Addr, Port, Packet, Opts) of
+		{'EXIT', Reason} ->
+		    ?ERROR_MSG("failed to process UDP packet:~n"
+			       "** Source: {~p, ~p}~n"
+			       "** Reason: ~p~n** Packet: ~p",
+			       [Addr, Port, Reason, Packet]),
+		    udp_recv(Socket, Module, Opts);
+		NewOpts ->
+		    udp_recv(Socket, Module, NewOpts)
+	    end;
+	{error, Reason} ->
+	    ?ERROR_MSG("unexpected UDP error: ~s", [format_error(Reason)]),
+	    throw({error, Reason})
+    end.
+
 accept(ListenSocket, Module, Opts) ->
     IntervalOpt =
         case proplists:get_value(accept_interval, Opts) of
@@ -327,89 +388,8 @@ accept(ListenSocket, Module, Opts, Interval) ->
 	    accept(ListenSocket, Module, Opts, NewInterval)
     end.
 
-udp_recv(Socket, Module, Opts) ->
-    case gen_udp:recv(Socket, 0) of
-	{ok, {Addr, Port, Packet}} ->
-	    case catch Module:udp_recv(Socket, Addr, Port, Packet, Opts) of
-		{'EXIT', Reason} ->
-		    ?ERROR_MSG("failed to process UDP packet:~n"
-			       "** Source: {~p, ~p}~n"
-			       "** Reason: ~p~n** Packet: ~p",
-			       [Addr, Port, Reason, Packet]),
-		    udp_recv(Socket, Module, Opts);
-		NewOpts ->
-		    udp_recv(Socket, Module, NewOpts)
-	    end;
-	{error, Reason} ->
-	    ?ERROR_MSG("unexpected UDP error: ~s", [format_error(Reason)]),
-	    throw({error, Reason})
-    end.
 
-%% @spec (Port, Module, Opts) -> {ok, Pid} | {error, Error}
 %% 添加监听
-start_listener(Port, Module, Opts) ->
-    case start_listener2(Port, Module, Opts) of
-	{ok, _Pid} = R -> R;
-	{error, {{'EXIT', {undef, [{M, _F, _A}|_]}}, _} = Error} ->
-	    ?ERROR_MSG("Error starting the ejabberd listener: ~p.~n"
-		       "It could not be loaded or is not an ejabberd listener.~n"
-		       "Error: ~p~n", [Module, Error]),
-	    {error, {module_not_available, M}};
-	{error, {already_started, Pid}} ->
-	    {ok, Pid};
-	{error, Error} ->
-	    {error, Error}
-    end.
-
-%% @spec (Port, Module, Opts) -> {ok, Pid} | {error, Error}
-start_listener2(Port, Module, Opts) ->
-    %% It is only required to start the supervisor in some cases.
-    %% But it doesn't hurt to attempt to start it for any listener.
-    %% So, it's normal (and harmless) that in most cases this call returns: {error, {already_started, pid()}}
-    maybe_start_sip(Module),
-    start_listener_sup(Port, Module, Opts).
-
-%%在ejabberd_sup监督进程下启动listen模块的sup,listen模块启动策略simple_one_for_one
-start_module_sup(_Port, Module) ->
-    Proc1 = gen_mod:get_module_proc(<<"sup">>, Module),
-    ChildSpec1 =
-	{Proc1,
-	 {ejabberd_tmp_sup, start_link, [Proc1, Module]},
-	 permanent,
-	 infinity,
-	 supervisor,
-	 [ejabberd_tmp_sup]},
-    supervisor:start_child(ejabberd_sup, ChildSpec1).
-
-start_listener_sup(Port, Module, Opts) ->
-    ChildSpec = {Port,
-		 {?MODULE, start, [Port, Module, Opts]},
-		 transient,
-		 brutal_kill,
-		 worker,
-		 [?MODULE]},
-    supervisor:start_child(?MODULE, ChildSpec).
-
-stop_listeners() ->
-    Ports = ejabberd_config:get_option(listen, fun validate_cfg/1),
-    lists:foreach(
-      fun({PortIpNetp, Module, _Opts}) ->
-	      delete_listener(PortIpNetp, Module)
-      end,
-      Ports).
-
-stop_listener({_, _, Transport} = PortIP, Module) ->
-    case supervisor:terminate_child(?MODULE, PortIP) of
-	ok ->
-	    ?INFO_MSG("Stop accepting ~s connections at ~s for ~p",
-		      [case Transport of udp -> "UDP"; tcp -> "TCP" end,
-		       format_portip(PortIP), Module]),
-	    ets:delete(?MODULE, PortIP),
-	    supervisor:delete_child(?MODULE, PortIP);
-	Err ->
-	    Err
-    end.
-
 add_listener(PortIP, Module, Opts) ->
     {Port, IPT, _, _, Proto, _} = parse_listener_portip(PortIP, Opts),
     PortIP1 = {Port, IPT, Proto},
@@ -433,6 +413,48 @@ add_listener(PortIP, Module, Opts) ->
 	    {error, Error}
     end.
 
+%% @spec (Port, Module, Opts) -> {ok, Pid} | {error, Error}
+%% 开始监听
+start_listener(Port, Module, Opts) ->
+    case start_listener2(Port, Module, Opts) of
+	{ok, _Pid} = R -> R;
+	{error, {{'EXIT', {undef, [{M, _F, _A}|_]}}, _} = Error} ->
+	    ?ERROR_MSG("Error starting the ejabberd listener: ~p.~n"
+		       "It could not be loaded or is not an ejabberd listener.~n"
+		       "Error: ~p~n", [Module, Error]),
+	    {error, {module_not_available, M}};
+	{error, {already_started, Pid}} ->
+	    {ok, Pid};
+	{error, Error} ->
+	    {error, Error}
+    end.
+
+%% @spec (Port, Module, Opts) -> {ok, Pid} | {error, Error}
+start_listener2(Port, Module, Opts) ->
+    %% It is only required to start the supervisor in some cases.
+    %% But it doesn't hurt to attempt to start it for any listener.
+    %% So, it's normal (and harmless) that in most cases this call returns: {error, {already_started, pid()}}
+    maybe_start_sip(Module),
+    start_listener_sup(Port, Module, Opts).
+
+start_listener_sup(Port, Module, Opts) ->
+    ChildSpec = {Port,
+		 {?MODULE, start, [Port, Module, Opts]},
+		 transient,
+		 brutal_kill,
+		 worker,
+		 [?MODULE]},
+    supervisor:start_child(?MODULE, ChildSpec).
+
+%% 停止所有监听
+stop_listeners() ->
+    Ports = ejabberd_config:get_option(listen, fun validate_cfg/1),
+    lists:foreach(
+      fun({PortIpNetp, Module, _Opts}) ->
+	      delete_listener(PortIpNetp, Module)
+      end,
+      Ports).
+
 delete_listener(PortIP, Module) ->
     delete_listener(PortIP, Module, []).
 
@@ -444,6 +466,7 @@ delete_listener(PortIP, Module) ->
 %%      IPS = string()
 %%      Module = atom()
 %%      Opts = [term()]
+%%		删除监听
 delete_listener(PortIP, Module, Opts) ->
     {Port, IPT, _, _, Proto, _} = parse_listener_portip(PortIP, Opts),
     PortIP1 = {Port, IPT, Proto},
@@ -459,46 +482,28 @@ delete_listener(PortIP, Module, Opts) ->
     ejabberd_config:add_option(listen, Ports2),
     stop_listener(PortIP1, Module).
 
+stop_listener({_, _, Transport} = PortIP, Module) ->
+    case supervisor:terminate_child(?MODULE, PortIP) of
+	ok ->
+	    ?INFO_MSG("Stop accepting ~s connections at ~s for ~p",
+		      [case Transport of udp -> "UDP"; tcp -> "TCP" end,
+		       format_portip(PortIP), Module]),
+	    ets:delete(?MODULE, PortIP),
+	    supervisor:delete_child(?MODULE, PortIP);
+	Err ->
+	    Err
+    end.
 
 maybe_start_sip(esip_socket) ->
     ejabberd:start_app(esip);
 maybe_start_sip(_) ->
     ok.
 
-config_reloaded() ->
-    New = case ejabberd_config:get_option(listen, fun validate_cfg/1) of
-	      undefined -> [];
-	      Ls -> Ls
-	  end,
-    Old = ets:tab2list(?MODULE),
-    lists:foreach(
-      fun({PortIP, Module, _Opts}) ->
-	      case lists:keyfind(PortIP, 1, New) of
-		  false ->
-		      stop_listener(PortIP, Module);
-		  _ ->
-		      ok
-	      end
-      end, Old),
-    lists:foreach(
-      fun({PortIP, Module, Opts}) ->
-	      case lists:keyfind(PortIP, 1, Old) of
-		  {_, Module, Opts} ->
-		      ok;
-		  {_, OldModule, _} ->
-		      stop_listener(PortIP, OldModule),
-		      ets:insert(?MODULE, {PortIP, Module, Opts}),
-		      start_listener(PortIP, Module, Opts);
-		  false ->
-		      ets:insert(?MODULE, {PortIP, Module, Opts}),
-		      start_listener(PortIP, Module, Opts)
-	      end
-      end, New).
-
 %%%
 %%% Check options
 %%%
 
+%% 检查参数，ssl已过时，在转数据的时候会被转换为stl，检查证书的可读性
 check_listener_options(Opts) ->
     case includes_deprecated_ssl_option(Opts) of
 	false -> ok;
@@ -653,6 +658,7 @@ transform_option({Port, Mod, Opts}) ->
 transform_option(Opt) ->
     Opt.
 
+%% 数据转换
 transform_options(Opts) ->
     lists:foldl(fun transform_options/2, [], Opts).
 

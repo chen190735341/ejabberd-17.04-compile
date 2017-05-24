@@ -502,6 +502,7 @@ handle_send(Pkt, Result, #{lserver := LServer} = State) ->
 init([State, Opts]) ->
     Access = gen_mod:get_opt(access, Opts, fun acl:access_rules_validator/1, all),
     Shaper = gen_mod:get_opt(shaper, Opts, fun acl:shaper_rules_validator/1, none),
+	%%tls参数
     TLSOpts1 = lists:filter(
 		 fun({certfile, _}) -> true;
 		    ({ciphers, _}) -> true;
@@ -519,7 +520,9 @@ init([State, Opts]) ->
                    false -> [compression_none | TLSOpts2];
                    true -> TLSOpts2
                end,
+	%% 是否可以使用tls
     TLSEnabled = proplists:get_bool(starttls, Opts),
+	%% 是否必须进行tls
     TLSRequired = proplists:get_bool(starttls_required, Opts),
     TLSVerify = proplists:get_bool(tls_verify, Opts),
     Zlib = proplists:get_bool(zlib, Opts),
@@ -598,20 +601,20 @@ process_message_in(State, #message{type = T} = Msg) ->
     %% most likely means having only some particular participant
     %% blocked, i.e. room@conference.server.org/participant.
     case privacy_check_packet(State, Msg, in) of
-	allow ->
-	    {true, State};
-	deny when T == groupchat; T == headline ->
-	    {false, State};
-	deny ->
-	    case xmpp:has_subtag(Msg, #muc_user{}) of
-		true ->
-		    ok;
-		false ->
-		    ejabberd_router:route_error(
-		      Msg, xmpp:err_service_unavailable())
-	    end,
-	    {false, State}
-    end.
+		allow ->
+			{true, State};
+		deny when T == groupchat; T == headline ->
+			{false, State};
+		deny ->
+			case xmpp:has_subtag(Msg, #muc_user{}) of
+				true ->
+					ok;
+				false ->
+					ejabberd_router:route_error(
+					  Msg, xmpp:err_service_unavailable())
+			end,
+			{false, State}
+	end.
 
 -spec process_presence_in(state(), presence()) -> {boolean(), state()}.
 process_presence_in(#{lserver := LServer, pres_a := PresA} = State0,

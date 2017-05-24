@@ -59,8 +59,9 @@ multicall(Module, Function, Args) ->
 multicall(Nodes, Module, Function, Args) ->
     rpc:multicall(Nodes, Module, Function, Args, 5000).
 
--spec join(node()) -> ok | {error, any()}.
 
+-spec join(node()) -> ok | {error, any()}.
+%% 加入集群
 join(Node) ->
     case {node(), net_adm:ping(Node)} of
         {Node, _} ->
@@ -93,6 +94,7 @@ leave(Node) ->
             Cluster = get_nodes()--[Node],
             leave(Cluster, Node);
         {_, pong} ->
+			%% 被删除的是远程节点
             rpc:call(Node, ?MODULE, leave, [Node], 10000);
         {_, pang} ->
             case mnesia:del_table_copy(schema, Node) of

@@ -29,6 +29,7 @@
 -behaviour(gen_server).
 
 %% External exports
+%% dist distance远程调用
 -export([start_link/0,
 	 add/3,
 	 add/4,

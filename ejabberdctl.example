@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# 
+# ejabberd管理脚本，处理环境变量，命令和参数，主要处理服务器启动，停止，命令调用等相关操作
+#
+
 # define default configuration
 POLL=true
 SMP=auto

@@ -168,18 +168,18 @@ add_list_local(Host, ACLs, Clear) ->
 		   true -> ok
 		end,
 		lists:foreach(fun (ACL) ->
-				      case ACL of
-					#acl{aclname = ACLName,
-					     aclspec = ACLSpec} ->
-					    mnesia:write(#acl{aclname =
-								  {ACLName,
-								   Host},
-							      aclspec =
-								  normalize_spec(ACLSpec)})
-				      end
-			      end,
-			      ACLs)
-	end,
+							   case ACL of
+								   #acl{aclname = ACLName,
+										aclspec = ACLSpec} ->
+									   mnesia:write(#acl{aclname =
+															 {ACLName,
+															  Host},
+														 aclspec =
+															 normalize_spec(ACLSpec)})
+							   end
+					  end,
+					  ACLs)
+		end,
     mnesia:transaction(F).
 
 -spec add_access(binary() | global,
@@ -196,6 +196,7 @@ add_access(Host, Access, Rules) ->
 
 -spec load_from_config() -> ok.
 
+%%  加载配置表里的访问限制，流量限制和制定的规则
 load_from_config() ->
     Hosts = [global|?MYHOSTS],
     lists:foreach(
@@ -221,13 +222,13 @@ load_from_config() ->
                                   add(Host, ACLName, {ACLType, ACLSpecs})
                           end, lists:flatten(SpecList))
                 end, ACLs),
-              lists:foreach(
-                fun({Access, Rules}) ->
-			NRules = lists:map(fun({ACL, Type}) ->
-					     {Type, [{acl, ACL}]}
-				     end, Rules),
-                        add_access(Host, Access, NRules ++ [{deny, [all]}])
-                end, AccessRules),
+			  lists:foreach(
+				fun({Access, Rules}) ->
+						NRules = lists:map(fun({ACL, Type}) ->
+												   {Type, [{acl, ACL}]}
+										   end, Rules),
+						add_access(Host, Access, NRules ++ [{deny, [all]}])
+				end, AccessRules),
               lists:foreach(
                 fun({Access, Rules}) ->
                         add_access(Host, Access, Rules)
@@ -308,6 +309,7 @@ any_rules_allowed(Host, Access, Entity) ->
 -spec match_rule(global | binary(), access_name(),
                  jid() | ljid() | inet:ip_address()) -> any().
 
+%% 判断限制
 match_rule(Host, Access, IP) when tuple_size(IP) == 4;
     tuple_size(IP) == 8 ->
     access_matches(Access, #{ip => IP}, Host);
@@ -599,6 +601,7 @@ transform_access_rules_config2({Res, Rules}) when is_list(Rules) ->
 transform_access_rules_config2({Res, Rule}) ->
     {Res, [Rule]}.
 
+%% 访问规则验证是否合法
 access_rules_validator(Name) when is_atom(Name) ->
     Name;
 access_rules_validator(Rules0) ->
@@ -609,7 +612,7 @@ access_rules_validator(Rules0) ->
 				       end),
     throw({replace_with, Rules}).
 
-
+%% 流量规则验证是否合法
 shaper_rules_validator(Name) when is_atom(Name) ->
     Name;
 shaper_rules_validator(Rules0) ->
@@ -670,20 +673,21 @@ transform_options(Opts) ->
                       [] -> [];
                       L1 -> [{access, L1}]
                   end,
-    ACLOpts2 = case lists:map(
-                      fun({ACLName, Os}) ->
-                              {ACLName, ejabberd_config:collect_options(Os)}
-                      end, ACLOpts1) of
-                   [] -> [];
-                   L2 -> [{acl, L2}]
-               end,
-    NewAccessOpts1 = case lists:map(
-			    fun({NAName, Os}) ->
-				    {NAName, transform_access_rules_config(Os)}
-			    end, lists:flatten(NewAccessOpts)) of
-			 [] -> [];
-			 L3 -> [{access_rules, L3}]
-		     end,
+	ACLOpts2 = case lists:map(
+					  fun({ACLName, Os}) ->
+							  {ACLName, ejabberd_config:collect_options(Os)}
+					  end, ACLOpts1) of
+				   [] -> [];
+				   L2 -> [{acl, L2}]
+			   end,
+	NewAccessOpts1 =
+		case lists:map(
+			   fun({NAName, Os}) ->
+					   {NAName, transform_access_rules_config(Os)}
+			   end, lists:flatten(NewAccessOpts)) of
+			[] -> [];
+			L3 -> [{access_rules, L3}]
+		end,
     ShaperOpts1 = case lists:map(
 			    fun({SName, Ss}) ->
 				    {SName, transform_access_rules_config(Ss)}

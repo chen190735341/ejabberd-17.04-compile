@@ -23,6 +23,7 @@
 %%%
 %%%----------------------------------------------------------------------
 
+%%% ejabberd的mnesia数据库表操作模块
 %%% This module should be used everywhere ejabberd creates a mnesia table
 %%% to make the schema customizable without code change
 %%% Just apply this change in ejabberd modules

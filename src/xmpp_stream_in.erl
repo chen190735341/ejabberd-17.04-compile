@@ -247,6 +247,7 @@ init([Module, {SockMod, Socket}, Opts]) ->
 		    {_, State2, Timeout} = noreply(State1),
 		    {ok, State2, Timeout};
 		{ok, State1} when Encrypted ->
+			%% 连接后强制tls
 		    TLSOpts = try Module:tls_options(State1)
 			      catch _:undef -> []
 			      end,
@@ -719,6 +720,7 @@ process_compress(#compress{methods = HisMethods},
 	    send_pkt(State, #compress_failure{reason = 'unsupported-method'})
     end.
 
+%% stl连接
 -spec process_starttls(state()) -> state().
 process_starttls(#{stream_encrypted := true} = State) ->
     process_starttls_failure(already_encrypted, State);
@@ -864,8 +866,10 @@ send_features(#{stream_version := {1,0},
 		stream_encrypted := Encrypted} = State) ->
     TLSRequired = is_starttls_required(State),
     Features = if TLSRequired and not Encrypted ->
+				%% 必须进行tls,并且还没有进行
 		       get_tls_feature(State);
 		  true ->
+				%% 不必须进行tls或者已经进行tls过
 		       get_sasl_feature(State) ++ get_compress_feature(State)
 			   ++ get_tls_feature(State) ++ get_bind_feature(State)
 			   ++ get_session_feature(State) ++ get_other_features(State)

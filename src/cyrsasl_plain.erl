@@ -50,36 +50,37 @@ mech_new(_Host, _GetPassword, CheckPassword, _CheckPasswordDigest) ->
     {ok, #state{check_password = CheckPassword}}.
 
 mech_step(State, ClientIn) ->
-    case prepare(ClientIn) of
-      [AuthzId, User, Password] ->
-	  case (State#state.check_password)(User, AuthzId, Password) of
-	    {true, AuthModule} ->
-		{ok,
-		 [{username, User}, {authzid, AuthzId},
-		  {auth_module, AuthModule}]};
-	    _ -> {error, not_authorized, User}
-	  end;
-      _ -> {error, parser_failed}
-    end.
+	case prepare(ClientIn) of
+		[AuthzId, User, Password] ->
+			case (State#state.check_password)(User, AuthzId, Password) of
+				{true, AuthModule} ->
+					{ok,
+					 [{username, User}, {authzid, AuthzId},
+					  {auth_module, AuthModule}]};
+				_ -> {error, not_authorized, User}
+			end;
+		_ -> {error, parser_failed}
+	end.
 
+%% 解析数据
 prepare(ClientIn) ->
-    case parse(ClientIn) of
-      [<<"">>, UserMaybeDomain, Password] ->
-	  case parse_domain(UserMaybeDomain) of
-	    %% <NUL>login@domain<NUL>pwd
-	    [User, _Domain] -> [User, User, Password];
-	    %% <NUL>login<NUL>pwd
-	    [User] -> [User, User, Password]
-	  end;
-      [AuthzId, User, Password] ->
-      case parse_domain(AuthzId) of
-      %% login@domain<NUL>login<NUL>pwd
-        [AuthzUser, _Domain] -> [AuthzUser, User, Password];
-        %% login<NUL>login<NUL>pwd
-        [AuthzUser] -> [AuthzUser, User, Password]
-      end;
-      _ -> error
-    end.
+	case parse(ClientIn) of
+		[<<"">>, UserMaybeDomain, Password] ->
+			case parse_domain(UserMaybeDomain) of
+				%% <NUL>login@domain<NUL>pwd
+				[User, _Domain] -> [User, User, Password];
+				%% <NUL>login<NUL>pwd
+				[User] -> [User, User, Password]
+			end;
+		[AuthzId, User, Password] ->
+			case parse_domain(AuthzId) of
+				%% login@domain<NUL>login<NUL>pwd
+				[AuthzUser, _Domain] -> [AuthzUser, User, Password];
+				%% login<NUL>login<NUL>pwd
+				[AuthzUser] -> [AuthzUser, User, Password]
+			end;
+		_ -> error
+	end.
 
 parse(S) -> parse1(binary_to_list(S), "", []).
 

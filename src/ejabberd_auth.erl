@@ -514,17 +514,20 @@ auth_modules(Server) ->
 			   (misc:atom_to_binary(M))/binary>>)
      || M <- Methods].
 
+%%　导出
 export(Server) ->
     ejabberd_auth_mnesia:export(Server).
 
 import_info() ->
     [{<<"users">>, 3}].
 
+%%导入开始
 import_start(_LServer, mnesia) ->
     ejabberd_auth_mnesia:init_db();
 import_start(_LServer, _) ->
     ok.
 
+%% 导入
 import(Server, {sql, _}, mnesia, <<"users">>, Fields) ->
     ejabberd_auth_mnesia:import(Server, Fields);
 import(Server, {sql, _}, riak, <<"users">>, Fields) ->
